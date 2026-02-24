@@ -1,1 +1,69 @@
-/* Component-specific styles if needed */
+/* Card layout: flex column for consistent alignment */
+.project-card {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.25);
+}
+
+/* Align tag and price row vertically */
+.project-card-header .flex {
+  align-items: center;
+}
+
+/* Title block: same height in every card so divider lines up */
+.project-card-title-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.project-card-details {
+  min-height: 0;
+  min-width: 0;
+  overflow: visible;
+}
+
+/* Price: standout pill with gradient border and glow */
+.project-price-wrap {
+  background: linear-gradient(135deg, hsl(var(--gold) / 0.12), hsl(var(--gold) / 0.06));
+  border: 1px solid hsl(var(--gold) / 0.4);
+  border-radius: 12px;
+  padding: 0.5rem 0.85rem 0.6rem;
+  box-shadow:
+    0 0 24px hsl(var(--gold) / 0.35),
+    0 0 48px hsl(var(--gold) / 0.2),
+    0 4px 16px hsl(var(--gold) / 0.25),
+    inset 0 1px 0 hsl(var(--gold) / 0.2);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.project-card:hover .project-price-wrap {
+  border-color: hsl(var(--gold) / 0.55);
+  box-shadow:
+    0 0 32px hsl(var(--gold) / 0.45),
+    0 0 64px hsl(var(--gold) / 0.25),
+    0 6px 20px hsl(var(--gold) / 0.35),
+    inset 0 1px 0 hsl(var(--gold) / 0.25);
+}
+
+.project-price {
+  color: hsl(0 0% 100%);
+  text-shadow: 0 0 20px hsl(var(--gold) / 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Tag badge: ensure gold gradient is visible */
+.project-tag {
+  background: linear-gradient(135deg, hsl(var(--gold-dark)), hsl(var(--gold)), hsl(var(--gold-light)));
+}
+
+/* Highlight pills subtle glow on hover */
+.project-highlight:hover {
+  box-shadow: 0 0 12px hsl(var(--gold) / 0.15);
+}

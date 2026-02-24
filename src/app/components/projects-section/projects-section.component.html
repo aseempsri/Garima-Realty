@@ -10,37 +10,55 @@
 
     <div class="grid md:grid-cols-3 gap-8">
       @for (project of projects; track project.name; let i = $index) {
-        <div 
-          class="group border border-white/10 bg-charcoal-light overflow-hidden hover:border-gold/40 transition-all duration-500"
+        <article
+          class="project-card group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-charcoal-light transition-all duration-500 min-w-0"
           [@fadeInUpDelay]
           [style.animation-delay]="getDelay(i)"
         >
-          <!-- Price badge area -->
-          <div class="p-6 border-b border-white/10">
-            <div class="flex items-center justify-between mb-3">
-              <span class="bg-gold/20 text-gold border border-gold/30 px-3 py-1 text-xs uppercase tracking-wider">
+          <!-- Gold accent bar (top) -->
+          <div class="project-card-accent absolute top-0 left-0 right-0 h-1 gold-gradient opacity-80 rounded-t-2xl" aria-hidden="true"></div>
+
+          <!-- Subtle corner glow (clipped by card) -->
+          <div class="absolute -top-20 -right-20 w-40 h-40 bg-gold/5 rounded-full blur-3xl transition-opacity duration-500 group-hover:bg-gold/10 pointer-events-none" aria-hidden="true"></div>
+
+          <!-- Price & tag header: fixed height for alignment -->
+          <div class="project-card-header relative flex-shrink-0 p-6 pb-4 min-w-0">
+            <div class="flex items-center justify-between gap-3 min-h-[3.25rem]">
+              <span class="project-tag inline-block px-3 py-1.5 text-xs font-sans uppercase tracking-[0.15em] text-white font-semibold rounded-full gold-gradient border border-gold/30 shadow-lg shadow-gold/10 shrink-0 max-w-[55%] break-words" [title]="project.tag">
                 {{ project.tag }}
               </span>
-              <span class="font-serif text-2xl text-gold">{{ project.price }}</span>
+              <div class="project-price-wrap flex flex-col items-end shrink-0 min-w-0 max-w-[48%]">
+                <span class="text-[10px] uppercase tracking-[0.25em] text-gold/70 font-sans">Price</span>
+                <span class="project-price font-serif text-xl md:text-2xl font-bold text-right break-words">{{ project.price }}</span>
+              </div>
             </div>
-            <h3 class="font-serif text-xl text-white group-hover:text-gold transition-colors">
-              {{ project.name }}
-            </h3>
-            <p class="text-white/40 text-sm font-sans mt-1">{{ project.location }}</p>
+            <!-- Title + location: min-height so divider aligns across cards -->
+            <div class="project-card-title-block min-h-[5.5rem] min-w-0">
+              <h3 class="font-serif text-xl md:text-2xl text-white group-hover:text-gold transition-colors duration-300 leading-tight break-words">
+                {{ project.name }}
+              </h3>
+              <p class="text-white/50 text-sm font-sans mt-2 flex items-center gap-2">
+                <span class="inline-block w-1 h-1 rounded-full bg-gold/60 shrink-0" aria-hidden="true"></span>
+                <span>{{ project.location }}</span>
+              </p>
+            </div>
           </div>
 
-          <!-- Details -->
-          <div class="p-6">
-            <p class="text-white/60 text-sm font-sans mb-4">{{ project.type }}</p>
-            <div class="flex flex-wrap gap-2">
+          <!-- Gradient divider -->
+          <div class="mx-6 h-px gold-gradient opacity-40 rounded-full flex-shrink-0" aria-hidden="true"></div>
+
+          <!-- Details: consistent padding and spacing -->
+          <div class="project-card-details relative flex-1 flex flex-col p-6 pt-5 pb-6 min-w-0 overflow-visible">
+            <p class="text-white/70 text-sm font-sans mb-4 font-medium break-words">{{ project.type }}</p>
+            <div class="flex flex-wrap gap-2 min-w-0">
               @for (highlight of project.highlights; track highlight) {
-                <span class="px-3 py-1 text-xs text-white/50 border border-white/10 font-sans">
+                <span class="project-highlight inline-flex items-center px-3 py-1.5 rounded-full text-xs font-sans text-gold/90 bg-gold/10 border border-gold/20 group-hover:border-gold/40 group-hover:bg-gold/15 transition-colors duration-300 break-words">
                   {{ highlight }}
                 </span>
               }
             </div>
           </div>
-        </div>
+        </article>
       }
     </div>
   </div>

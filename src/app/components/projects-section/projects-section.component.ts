@@ -45,9 +45,9 @@ export class ProjectsSectionComponent {
     {
       name: 'Trump World Trade Center',
       location: 'Koregaon Park, Pune',
-      price: '₹8 Cr onwards',
+      price: '₹8 Cr',
       type: 'Commercial & Investment',
-      tag: 'Investment Opportunity',
+      tag: 'Investment',
       highlights: ['Global Brand', 'High ROI', 'A-Grade Offices'],
     },
     {
@@ -56,7 +56,7 @@ export class ProjectsSectionComponent {
       price: '₹175 Cr',
       type: '8 Acres — Development Land',
       tag: 'Exclusive',
-      highlights: ['Prime Location', 'Development Ready', 'High Appreciation'],
+      highlights: ['Prime Location', 'Development Ready', 'Strong Returns'],
     },
   ];
 
