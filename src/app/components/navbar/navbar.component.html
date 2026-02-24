@@ -2,7 +2,14 @@
   [class]="scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'"
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
   <div class="container mx-auto flex items-center justify-between px-6">
-    <a href="#" class="flex items-center gap-3">
+    <a
+      href="#"
+      class="navbar-logo flex items-center gap-3 transition-all duration-300 md:!opacity-100 md:!visible md:!pointer-events-auto"
+      [class.opacity-0]="!pastHero"
+      [class.invisible]="!pastHero"
+      [class.pointer-events-none]="!pastHero"
+      [class.opacity-100]="pastHero"
+      [class.visible]="pastHero">
       <img src="assets/gr%20logo.png" alt="Garima Realty" class="h-10 object-contain" />
     </a>
 

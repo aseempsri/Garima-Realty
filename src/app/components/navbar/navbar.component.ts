@@ -16,6 +16,7 @@ interface NavLink {
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   scrolled = false;
+  pastHero = false;
   mobileOpen = false;
 
   navLinks: NavLink[] = [
@@ -30,6 +31,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
     this.scrolled = window.scrollY > 50;
+    this.pastHero = window.scrollY >= window.innerHeight - 50;
   }
 
   ngOnInit(): void {

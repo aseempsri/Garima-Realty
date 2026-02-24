@@ -1,1 +1,22 @@
-/* Component styles */
+/* Center logo: mobile 50% smaller (50% of 24rem), desktop full size */
+.hero-center-logo {
+  width: 12rem;
+  height: 12rem;
+  max-width: 90vw;
+}
+
+@media (min-width: 768px) {
+  .hero-center-logo {
+    width: 24rem;
+    height: 24rem;
+    max-width: none;
+  }
+}
+
+/* Mobile only: tagline max-width so 2 lines fit; desktop unchanged */
+@media (max-width: 767px) {
+  .hero-tagline {
+    max-width: 24ch;
+    margin-inline: auto;
+  }
+}
