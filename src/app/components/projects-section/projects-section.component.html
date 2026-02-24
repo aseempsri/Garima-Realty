@@ -1,0 +1,47 @@
+<section id="projects" class="py-24 bg-charcoal">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16" @fadeInUp>
+      <span class="text-gold text-sm uppercase tracking-[0.3em] font-sans">Portfolio</span>
+      <h2 class="font-serif text-3xl md:text-4xl text-white mt-3">
+        Featured <span class="text-gradient-gold">Properties</span>
+      </h2>
+      <div class="w-16 h-0.5 gold-gradient mx-auto mt-6"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      @for (project of projects; track project.name; let i = $index) {
+        <div 
+          class="group border border-white/10 bg-charcoal-light overflow-hidden hover:border-gold/40 transition-all duration-500"
+          [@fadeInUpDelay]
+          [style.animation-delay]="getDelay(i)"
+        >
+          <!-- Price badge area -->
+          <div class="p-6 border-b border-white/10">
+            <div class="flex items-center justify-between mb-3">
+              <span class="bg-gold/20 text-gold border border-gold/30 px-3 py-1 text-xs uppercase tracking-wider">
+                {{ project.tag }}
+              </span>
+              <span class="font-serif text-2xl text-gold">{{ project.price }}</span>
+            </div>
+            <h3 class="font-serif text-xl text-white group-hover:text-gold transition-colors">
+              {{ project.name }}
+            </h3>
+            <p class="text-white/40 text-sm font-sans mt-1">{{ project.location }}</p>
+          </div>
+
+          <!-- Details -->
+          <div class="p-6">
+            <p class="text-white/60 text-sm font-sans mb-4">{{ project.type }}</p>
+            <div class="flex flex-wrap gap-2">
+              @for (highlight of project.highlights; track highlight) {
+                <span class="px-3 py-1 text-xs text-white/50 border border-white/10 font-sans">
+                  {{ highlight }}
+                </span>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

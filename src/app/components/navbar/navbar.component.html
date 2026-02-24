@@ -1,0 +1,59 @@
+<nav
+  [class]="scrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <div class="container mx-auto flex items-center justify-between px-6">
+    <a href="#" class="flex items-center gap-3">
+      <img src="assets/gr%20logo.png" alt="Garima Realty" class="h-10 object-contain" />
+    </a>
+
+    <!-- Desktop -->
+    <div class="hidden md:flex items-center gap-8">
+      @for (link of navLinks; track link.href) {
+        <a
+          [href]="link.href"
+          class="text-sm font-sans tracking-widest uppercase text-white/80 hover:text-gold transition-colors duration-300">
+          {{ link.label }}
+        </a>
+      }
+      <a
+        href="#contact"
+        class="ml-4 px-5 py-2 border border-gold text-gold text-sm uppercase tracking-widest hover:bg-gold hover:text-white transition-all duration-300">
+        Enquire
+      </a>
+    </div>
+
+    <!-- Mobile toggle -->
+    <button
+      (click)="toggleMobile()"
+      class="md:hidden text-white"
+      aria-label="Toggle menu">
+      @if (mobileOpen) {
+        <lucide-icon name="x" [size]="24"></lucide-icon>
+      } @else {
+        <lucide-icon name="menu" [size]="24"></lucide-icon>
+      }
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  @if (mobileOpen) {
+    <div class="mobile-menu-glass md:hidden border-t border-white/20">
+      <div class="flex flex-col items-center py-6 gap-5">
+        @for (link of navLinks; track link.href) {
+          <a
+            [href]="link.href"
+            (click)="closeMobile()"
+            class="mobile-menu-link text-sm tracking-widest uppercase text-white hover:text-gold transition-colors">
+            {{ link.label }}
+          </a>
+        }
+        <a
+          href="#contact"
+          (click)="closeMobile()"
+          class="mobile-menu-btn mt-2 px-6 py-2 border border-gold text-gold text-sm uppercase tracking-widest hover:bg-gold hover:text-white transition-all">
+          Enquire
+        </a>
+      </div>
+    </div>
+  }
+</nav>

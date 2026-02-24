@@ -1,0 +1,42 @@
+<section id="about" class="py-24 bg-cream" appScrollIntoView (inView)="onInViewChange($event)">
+  <div class="container mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <!-- Left — Story -->
+      <div [@fadeInLeft]="isInView ? 'visible' : 'hidden'">
+        <span class="text-gold text-sm uppercase tracking-[0.3em] font-sans">About Us</span>
+        <h2 class="font-serif text-3xl md:text-4xl text-charcoal mt-3 mb-6">
+          We Don't Just Close Deals —
+          <br />
+          <span class="text-gradient-gold">We Create Investment Legacies</span>
+        </h2>
+        <div class="w-16 h-0.5 gold-gradient mb-6"></div>
+        <p class="text-muted-foreground leading-relaxed mb-4 font-sans">
+          Founded by <strong>Garima Shrivastava</strong>, Garima Realty has grown from a passion for 
+          premium real estate into Pune's most trusted luxury property advisory. With over 15 years 
+          of experience and deep market intelligence, we specialize in identifying high-value 
+          opportunities across residential and commercial segments.
+        </p>
+        <p class="text-muted-foreground leading-relaxed font-sans">
+          Our client-first philosophy, combined with strong developer relationships and RERA compliance, 
+          ensures that every transaction is transparent, strategic, and designed to build lasting wealth.
+        </p>
+      </div>
+
+      <!-- Right — Stats -->
+      <div [@fadeInRight]="isInView ? 'visible' : 'hidden'">
+        <div class="grid grid-cols-2 gap-6">
+          <div
+            *ngFor="let stat of stats; let i = index"
+            [@fadeInUp]="isInView ? 'visible' : 'hidden'"
+            [style.animation-delay]="getStatDelay(i)"
+            class="bg-white p-8 text-center shadow-sm border border-border hover:border-gold/40 transition-colors duration-300">
+            <div class="text-3xl md:text-4xl font-serif text-gold mb-2">{{ stat.value }}</div>
+            <div class="text-sm text-muted-foreground uppercase tracking-widest font-sans">
+              {{ stat.label }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

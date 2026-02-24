@@ -1,0 +1,49 @@
+<section id="founders" class="py-24 bg-charcoal">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16" @fadeInUp>
+      <span class="text-gold text-sm uppercase tracking-[0.3em] font-sans">Leadership</span>
+      <h2 class="font-serif text-3xl md:text-4xl text-white mt-3">
+        Meet the <span class="text-gradient-gold">Founders</span>
+      </h2>
+      <div class="w-16 h-0.5 gold-gradient mx-auto mt-6"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto">
+      @for (f of founders; track f.name; let i = $index) {
+        <article 
+          class="founder-card group relative overflow-hidden rounded-2xl border border-white/10 bg-charcoal-light p-8 shadow-xl shadow-black/30 transition-all duration-300 hover:border-gold/20 hover:shadow-2xl hover:shadow-black/40"
+          [@fadeInUpDelay]
+          [style.animation-delay]="getDelay(i)"
+        >
+          <!-- Subtle gold accent corner -->
+          <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-gold/10 to-transparent rounded-bl-full pointer-events-none" aria-hidden="true"></div>
+
+          <header class="flex items-center gap-6 mb-6">
+            <div class="relative shrink-0">
+              <img
+                [src]="f.image"
+                [alt]="f.name"
+                class="w-[7.2rem] h-[7.2rem] rounded-full object-cover ring-2 ring-gold/40 shadow-lg"
+              />
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-serif text-2xl text-gold mb-0.5 tracking-tight">{{ f.name }}</h3>
+              <p class="text-white/50 text-xs font-sans uppercase tracking-[0.2em] mb-2">{{ f.role }}</p>
+              <div class="w-12 h-0.5 gold-gradient rounded-full" aria-hidden="true"></div>
+            </div>
+          </header>
+
+          <p class="text-white/70 text-sm font-sans leading-relaxed mb-6">{{ f.bio }}</p>
+
+          <div class="flex flex-wrap gap-2 pt-5 border-t border-white/10">
+            @for (e of f.expertise; track e) {
+              <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-sans text-gold/90 bg-gold/10 border border-gold/20 shrink-0">
+                {{ e }}
+              </span>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

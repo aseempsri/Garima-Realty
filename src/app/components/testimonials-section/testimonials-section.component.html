@@ -1,0 +1,39 @@
+<section class="py-24 bg-cream">
+  <div class="container mx-auto px-6 max-w-3xl">
+    <div class="text-center mb-12" @fadeInUp>
+      <span class="text-gold text-sm uppercase tracking-[0.3em] font-sans">Testimonials</span>
+      <h2 class="font-serif text-3xl md:text-4xl text-charcoal mt-3">
+        Client <span class="text-gradient-gold">Stories</span>
+      </h2>
+      <div class="w-16 h-0.5 gold-gradient mx-auto mt-6"></div>
+    </div>
+
+    <div class="text-center" [@fadeIn]>
+      <lucide-icon name="quote" class="w-10 h-10 text-gold/30 mx-auto mb-6" />
+      <p class="text-charcoal font-serif text-lg md:text-xl italic leading-relaxed mb-8">
+        "{{ activeTestimonial.quote }}"
+      </p>
+      <p class="text-gold font-serif text-lg">{{ activeTestimonial.name }}</p>
+      <p class="text-muted-foreground text-sm font-sans">{{ activeTestimonial.role }}</p>
+    </div>
+
+    <div class="flex justify-center gap-4 mt-8">
+      <button
+        (click)="prev()"
+        class="w-10 h-10 border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all"
+        aria-label="Previous testimonial"
+        type="button"
+      >
+        <lucide-icon name="chevron-left" class="w-4 h-4" />
+      </button>
+      <button
+        (click)="next()"
+        class="w-10 h-10 border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all"
+        aria-label="Next testimonial"
+        type="button"
+      >
+        <lucide-icon name="chevron-right" class="w-4 h-4" />
+      </button>
+    </div>
+  </div>
+</section>

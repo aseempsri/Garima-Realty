@@ -1,0 +1,31 @@
+<section class="py-24 bg-cream">
+  <div class="container mx-auto px-6 max-w-3xl">
+    <div class="text-center mb-12" @fadeInUp>
+      <span class="text-gold text-sm uppercase tracking-[0.3em] font-sans">FAQ</span>
+      <h2 class="font-serif text-3xl md:text-4xl text-charcoal mt-3">
+        Frequently Asked <span class="text-gradient-gold">Questions</span>
+      </h2>
+      <div class="w-16 h-0.5 gold-gradient mx-auto mt-6"></div>
+    </div>
+
+    <div class="space-y-3" @fadeInUp>
+      @for (faq of faqs; track faq.q; let i = $index) {
+        <div class="bg-white border border-border px-6" [class.border-gold/40]="isExpanded(i)">
+          <button
+            (click)="toggle(i)"
+            class="w-full py-4 text-left font-serif text-charcoal hover:text-gold transition-colors flex items-center justify-between"
+            type="button"
+          >
+            <span>{{ faq.q }}</span>
+            <span class="text-gold">{{ isExpanded(i) ? '−' : '+' }}</span>
+          </button>
+          @if (isExpanded(i)) {
+            <div class="pb-4 text-muted-foreground font-sans leading-relaxed">
+              {{ faq.a }}
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>

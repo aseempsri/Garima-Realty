@@ -1,0 +1,24 @@
+<section class="py-24 bg-charcoal">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16" @fadeInUp>
+      <span class="text-gold text-sm uppercase tracking-[0.3em] font-sans">Trust</span>
+      <h2 class="font-serif text-3xl md:text-4xl text-white mt-3">
+        Why Choose <span class="text-gradient-gold">Garima Realty</span>
+      </h2>
+      <div class="w-16 h-0.5 gold-gradient mx-auto mt-6"></div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      @for (reason of reasons; track reason; let i = $index) {
+        <div 
+          class="flex items-center gap-3 p-5 border border-white/10 bg-charcoal-light"
+          [@slideInLeft]
+          [style.animation-delay]="getDelay(i)"
+        >
+          <lucide-icon name="check-circle-2" class="w-5 h-5 text-gold flex-shrink-0" />
+          <span class="text-white/80 font-sans text-sm">{{ reason }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>

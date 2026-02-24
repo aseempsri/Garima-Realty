@@ -1,0 +1,27 @@
+<section id="presence" class="py-24 bg-charcoal">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16" @fadeInUp>
+      <span class="text-gold text-sm uppercase tracking-[0.3em] font-sans">Our Presence</span>
+      <h2 class="font-serif text-3xl md:text-4xl text-white mt-3">
+        Multi-City <span class="text-gradient-gold">Expertise</span>
+      </h2>
+      <div class="w-16 h-0.5 gold-gradient mx-auto mt-6"></div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (city of cities; track city.name; let i = $index) {
+        <div 
+          class="group border border-white/10 p-8 hover:border-gold/50 transition-all duration-500 bg-charcoal-light"
+          [@fadeInUpDelay]
+          [style.animation-delay]="getDelay(i)"
+        >
+          <lucide-icon name="map-pin" class="w-5 h-5 text-gold mb-4" />
+          <h3 class="font-serif text-xl text-white mb-3 group-hover:text-gold transition-colors">
+            {{ city.name }}
+          </h3>
+          <p class="text-white/50 text-sm leading-relaxed font-sans">{{ city.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

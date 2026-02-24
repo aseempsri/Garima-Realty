@@ -1,0 +1,27 @@
+<section class="py-24 bg-cream">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16" @fadeInUp>
+      <span class="text-gold text-sm uppercase tracking-[0.3em] font-sans">Market Insights</span>
+      <h2 class="font-serif text-3xl md:text-4xl text-charcoal mt-3">
+        Why Invest in <span class="text-gradient-gold">Pune</span>
+      </h2>
+      <div class="w-16 h-0.5 gold-gradient mx-auto mt-6"></div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      @for (r of reasons; track r.title; let i = $index) {
+        <div 
+          class="text-center"
+          [@fadeInUpDelay]
+          [style.animation-delay]="getDelay(i)"
+        >
+          <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-gold/10 flex items-center justify-center">
+            <lucide-icon [name]="r.iconType" class="w-7 h-7 text-gold" />
+          </div>
+          <h3 class="font-serif text-lg text-charcoal mb-2">{{ r.title }}</h3>
+          <p class="text-muted-foreground text-sm font-sans leading-relaxed">{{ r.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

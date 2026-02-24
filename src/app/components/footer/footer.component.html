@@ -1,0 +1,69 @@
+<footer class="bg-charcoal border-t border-white/10">
+  <div class="container mx-auto px-6 py-12">
+    <div class="grid md:grid-cols-3 gap-10 items-start">
+      <!-- Logo & tagline -->
+      <div>
+        <img src="assets/gr%20logo.png" alt="Garima Realty" class="h-10 mb-4 object-contain" />
+        <p class="text-white/40 text-sm font-sans leading-relaxed">
+          Elevating Property. Empowering Wealth.<br />
+          Pune's premier luxury real estate advisory.
+        </p>
+        <a
+          href="https://www.instagram.com/garimarealty?igsh=emFhazJjZXoxOHhu"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 mt-3 text-white/50 hover:text-gold transition-colors"
+          aria-label="Follow us on Instagram">
+          <lucide-icon name="instagram" [size]="22"></lucide-icon>
+        </a>
+      </div>
+
+      <!-- Quick links -->
+      <div class="flex flex-col gap-2">
+        <span class="text-gold text-xs uppercase tracking-[0.3em] font-sans mb-2">Quick Links</span>
+        @for (link of quickLinks; track link) {
+          <a
+            [href]="'#' + link.toLowerCase()"
+            class="text-white/50 text-sm font-sans hover:text-gold transition-colors"
+          >
+            {{ link }}
+          </a>
+        }
+      </div>
+
+      <!-- RERA & Legal -->
+      <div>
+        <span class="text-gold text-xs uppercase tracking-[0.3em] font-sans mb-2 block">Compliance</span>
+        <p class="text-white/50 text-sm font-sans mt-2">
+          MahaRERA Registration No:<br />
+          <span class="text-gold">A011262401115</span>
+        </p>
+        <p class="text-white/30 text-xs font-sans mt-4">
+          Available on
+          <a
+            href="https://maharera.maharashtra.gov.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline hover:text-gold transition-colors"
+          >
+            maharera.maharashtra.gov.in
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-white/30 text-xs font-sans">
+        © {{ currentYear }} Garima Realty. All rights reserved.
+      </p>
+      <div class="flex gap-4">
+        <a href="#" class="text-white/30 text-xs hover:text-gold transition-colors font-sans">
+          Privacy Policy
+        </a>
+        <a href="#" class="text-white/30 text-xs hover:text-gold transition-colors font-sans">
+          Terms of Service
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,91 @@
+<section id="contact" class="py-24 bg-charcoal">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16" @fadeInUp>
+      <span class="text-gold text-sm uppercase tracking-[0.3em] font-sans">Get In Touch</span>
+      <h2 class="font-serif text-3xl md:text-4xl text-white mt-3">
+        Ready to Invest in <span class="text-gradient-gold">Pune's Future?</span>
+      </h2>
+      <div class="w-16 h-0.5 gold-gradient mx-auto mt-6"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+      <!-- Form -->
+      <form
+        (ngSubmit)="onSubmit()"
+        class="space-y-5"
+        @slideInLeft
+        [style.animation-delay]="getFormDelay()"
+      >
+        <input
+          type="text"
+          placeholder="Your Name"
+          [(ngModel)]="form.name"
+          name="name"
+          required
+          class="w-full bg-charcoal-light border border-white/10 text-white placeholder:text-white/30 focus-visible:ring-gold h-12 px-4 rounded"
+        />
+        <input
+          type="tel"
+          placeholder="Phone Number"
+          [(ngModel)]="form.phone"
+          name="phone"
+          required
+          class="w-full bg-charcoal-light border border-white/10 text-white placeholder:text-white/30 focus-visible:ring-gold h-12 px-4 rounded"
+        />
+        <input
+          type="text"
+          placeholder="City"
+          [(ngModel)]="form.city"
+          name="city"
+          class="w-full bg-charcoal-light border border-white/10 text-white placeholder:text-white/30 focus-visible:ring-gold h-12 px-4 rounded"
+        />
+        <input
+          type="text"
+          placeholder="Property Interest (e.g. 3BHK, Commercial)"
+          [(ngModel)]="form.interest"
+          name="interest"
+          class="w-full bg-charcoal-light border border-white/10 text-white placeholder:text-white/30 focus-visible:ring-gold h-12 px-4 rounded"
+        />
+        <button
+          type="submit"
+          class="w-full h-12 bg-gold text-white hover:bg-gold-dark uppercase tracking-widest text-sm font-sans rounded"
+        >
+          Send Enquiry
+        </button>
+      </form>
+
+      <!-- Contact Info -->
+      <div
+        class="space-y-8"
+        @slideInRight
+        [style.animation-delay]="getContactDelay()"
+      >
+        <div class="flex gap-4">
+          <lucide-icon name="phone" class="w-5 h-5 text-gold mt-1 flex-shrink-0" />
+          <div>
+            <p class="text-white font-sans text-sm mb-1">Call Us</p>
+            <p class="text-white/60 font-sans text-sm">+91 90110 66839</p>
+            <p class="text-white/60 font-sans text-sm">+91 84460 24842</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <lucide-icon name="mail" class="w-5 h-5 text-gold mt-1 flex-shrink-0" />
+          <div>
+            <p class="text-white font-sans text-sm mb-1">Email</p>
+            <p class="text-white/60 font-sans text-sm">info@garimarealty.com</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <lucide-icon name="map-pin" class="w-5 h-5 text-gold mt-1 flex-shrink-0" />
+          <div>
+            <p class="text-white font-sans text-sm mb-1">Office</p>
+            <p class="text-white/60 font-sans text-sm">
+              Amanora Park Town,<br />
+              Hadapsar, Pune — 411028
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
