@@ -35,7 +35,7 @@
               </div>
 
               <!-- Listing Card -->
-              <div class="listing-card bg-charcoal-light/80 backdrop-blur-sm border-2 rounded-xl p-5 pl-16 md:pl-20 transition-all duration-300"
+              <div class="listing-card bg-charcoal-light/80 backdrop-blur-sm border-2 rounded-xl p-5 pl-16 md:pl-20 pr-4 md:pr-5 transition-all duration-300"
                    [class.border-gold]="selectedListing?.id === listing.id"
                    [class.border-white/10]="selectedListing?.id !== listing.id"
                    [class.shadow-xl]="selectedListing?.id === listing.id"
@@ -43,8 +43,8 @@
                    [class.active-card]="selectedListing?.id === listing.id">
                 
                 <!-- Category Tag -->
-                <div class="flex items-center justify-between mb-2">
-                  <span class="listing-category text-gold/80 text-xs font-sans uppercase tracking-wider">
+                <div class="flex items-center justify-between mb-2 gap-2">
+                  <span class="listing-category text-gold/80 text-xs font-sans uppercase tracking-wider flex-shrink-0">
                     {{ listing.category }}
                   </span>
                   @if (selectedListing?.id === listing.id) {
