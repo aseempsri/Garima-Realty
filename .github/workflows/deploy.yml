@@ -1,5 +1,5 @@
 # Deploy Angular app to GitHub Pages on every push to main
-# Repo site will be at https://aseempsri.github.io/Garima-Realty/
+# Custom domain (www.garimarealty.com) is served at root, so base-href must be /
 
 name: Deploy to GitHub Pages
 
@@ -33,7 +33,7 @@ jobs:
         run: npm ci
 
       - name: Build for GitHub Pages
-        run: npx ng build --configuration production --base-href /Garima-Realty/
+        run: npx ng build --configuration production --base-href /
 
       - name: SPA fallback for client-side routing
         run: cp dist/Garima-Realty/browser/index.html dist/Garima-Realty/browser/404.html
