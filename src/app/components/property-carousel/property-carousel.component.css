@@ -1,0 +1,56 @@
+/* Hide scrollbar for thumbnail strip */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Carousel slide animation */
+.carousel-slide {
+  transition: transform 0.3s ease;
+}
+
+/* Navigation buttons */
+.carousel-nav-btn {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-nav-btn:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px hsl(var(--gold) / 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Thumbnail styling */
+.carousel-thumbnail {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-thumbnail:hover {
+  opacity: 1 !important;
+  transform: scale(1.05);
+  border-color: hsl(var(--gold) / 0.5) !important;
+}
+
+.carousel-thumbnail:active {
+  transform: scale(0.95);
+}
+
+/* Mobile optimizations */
+@media (max-width: 767px) {
+  .carousel-nav-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .carousel-slide {
+    border-radius: 1rem;
+  }
+}

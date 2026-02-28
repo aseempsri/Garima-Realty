@@ -1,0 +1,102 @@
+<section id="property-gallery" class="py-16 md:py-24 bg-charcoal relative overflow-hidden">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 bg-gradient-to-b from-gold/5 via-transparent to-transparent pointer-events-none hidden md:block" aria-hidden="true"></div>
+  
+  <div class="container mx-auto px-4 md:px-6 relative z-10">
+    <div class="text-center mb-10 md:mb-16">
+      <span class="text-gold text-xs md:text-sm uppercase tracking-[0.3em] font-sans mb-3 md:mb-4 inline-block">Portfolio</span>
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-white mb-3 md:mb-4 font-bold">
+        Featured <span class="text-gradient-gold">Properties</span>
+      </h2>
+      <div class="w-16 md:w-24 h-0.5 md:h-1 gold-gradient mx-auto rounded-full shadow-lg shadow-gold/30" aria-hidden="true"></div>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class="relative max-w-6xl mx-auto">
+      <!-- Main Image Display -->
+      <div 
+        class="carousel-slide relative rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10 bg-charcoal-light"
+        (touchstart)="onTouchStart($event)"
+        (touchend)="onTouchEnd($event)"
+        [@slide]
+      >
+        <div class="aspect-video md:aspect-[21/9] relative">
+          <img
+            [src]="propertyImages[currentIndex]"
+            [alt]="'Property image ' + (currentIndex + 1)"
+            class="w-full h-full object-cover"
+            loading="lazy"
+            (error)="onImageError(currentIndex, $event)"
+            [style.display]="imageLoadErrors.has(currentIndex) ? 'none' : 'block'"
+          />
+          @if (imageLoadErrors.has(currentIndex)) {
+            <div class="absolute inset-0 flex items-center justify-center bg-charcoal-light/50">
+              <p class="text-white/50 text-sm">Image not available</p>
+            </div>
+          }
+          <!-- Gradient overlay for better text readability if needed -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button
+          (click)="previous()"
+          (mouseenter)="stopAutoSlide()"
+          (mouseleave)="startAutoSlide()"
+          class="carousel-nav-btn absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm border border-gold/30 hover:border-gold/60 flex items-center justify-center transition-all duration-300 group"
+          aria-label="Previous image"
+        >
+          <lucide-icon name="chevron-left" class="w-5 h-5 md:w-6 md:h-6 text-gold group-hover:text-gold-light transition-colors" stroke-width="2"></lucide-icon>
+        </button>
+
+        <button
+          (click)="next()"
+          (mouseenter)="stopAutoSlide()"
+          (mouseleave)="startAutoSlide()"
+          class="carousel-nav-btn absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm border border-gold/30 hover:border-gold/60 flex items-center justify-center transition-all duration-300 group"
+          aria-label="Next image"
+        >
+          <lucide-icon name="chevron-right" class="w-5 h-5 md:w-6 md:h-6 text-gold group-hover:text-gold-light transition-colors" stroke-width="2"></lucide-icon>
+        </button>
+
+        <!-- Image Counter -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm border border-gold/30">
+          <span class="text-white text-sm font-sans">
+            {{ currentIndex + 1 }} / {{ propertyImages.length }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Thumbnail Strip -->
+      <div class="mt-6 md:mt-8 overflow-x-auto scrollbar-hide pb-2">
+        <div class="flex gap-3 md:gap-4 justify-center min-w-max px-4">
+          @for (image of propertyImages; track image; let i = $index) {
+            <button
+              (click)="goToSlide(i)"
+              class="carousel-thumbnail flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-300"
+              [class.border-gold]="i === currentIndex"
+              [class.border-white/20]="i !== currentIndex"
+              [class.opacity-60]="i !== currentIndex"
+              [class.opacity-100]="i === currentIndex"
+              [class.scale-105]="i === currentIndex"
+              aria-label="Go to image {{ i + 1 }}"
+            >
+              <div class="w-16 h-12 md:w-20 md:h-14 relative">
+                <img
+                  [src]="image"
+                  [alt]="'Thumbnail ' + (i + 1)"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  (error)="onImageError(i, $event)"
+                />
+                @if (i === currentIndex) {
+                  <div class="absolute inset-0 bg-gold/20 pointer-events-none" aria-hidden="true"></div>
+                }
+              </div>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

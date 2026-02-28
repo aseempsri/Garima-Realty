@@ -5,7 +5,9 @@ import { HeroSectionComponent } from '../../components/hero-section/hero-section
 import { AboutSectionComponent } from '../../components/about-section/about-section.component';
 import { PresenceSectionComponent } from '../../components/presence-section/presence-section.component';
 import { ServicesSectionComponent } from '../../components/services-section/services-section.component';
+import { WarehouseSectionComponent } from '../../components/warehouse-section/warehouse-section.component';
 import { ProjectsSectionComponent } from '../../components/projects-section/projects-section.component';
+import { FeaturedPortfolioSectionComponent } from '../../components/featured-portfolio-section/featured-portfolio-section.component';
 import { WhyPuneSectionComponent } from '../../components/why-pune-section/why-pune-section.component';
 import { WhyChooseSectionComponent } from '../../components/why-choose-section/why-choose-section.component';
 import { FoundersSectionComponent } from '../../components/founders-section/founders-section.component';
@@ -26,7 +28,9 @@ import { WhatsAppButtonComponent } from '../../components/whatsapp-button/whatsa
     AboutSectionComponent,
     PresenceSectionComponent,
     ServicesSectionComponent,
+    WarehouseSectionComponent,
     ProjectsSectionComponent,
+    FeaturedPortfolioSectionComponent,
     WhyPuneSectionComponent,
     WhyChooseSectionComponent,
     FoundersSectionComponent,

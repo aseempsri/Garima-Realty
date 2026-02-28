@@ -35,6 +35,12 @@ jobs:
       - name: Build for GitHub Pages
         run: npx ng build --configuration production --base-href /
 
+      - name: Inject build timestamp for cache busting
+        run: |
+          BUILD_TIMESTAMP=$(date +%s)
+          sed -i "s/BUILD_TIMESTAMP/$BUILD_TIMESTAMP/g" dist/Garima-Realty/browser/index.html
+          echo "Build timestamp: $BUILD_TIMESTAMP"
+
       - name: SPA fallback for client-side routing
         run: cp dist/Garima-Realty/browser/index.html dist/Garima-Realty/browser/404.html
 
