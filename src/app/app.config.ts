@@ -27,6 +27,9 @@ import {
   Building,
   Cpu,
   Instagram,
+  Trophy,
+  Award,
+  Check,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -58,6 +61,9 @@ export const appConfig: ApplicationConfig = {
         Building,
         Cpu,
         Instagram,
+        Trophy,
+        Award,
+        Check,
       })
     ),
   ],

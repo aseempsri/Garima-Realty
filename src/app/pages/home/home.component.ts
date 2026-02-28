@@ -9,6 +9,7 @@ import { ProjectsSectionComponent } from '../../components/projects-section/proj
 import { WhyPuneSectionComponent } from '../../components/why-pune-section/why-pune-section.component';
 import { WhyChooseSectionComponent } from '../../components/why-choose-section/why-choose-section.component';
 import { FoundersSectionComponent } from '../../components/founders-section/founders-section.component';
+import { AchievementsSectionComponent } from '../../components/achievements-section/achievements-section.component';
 import { TestimonialsSectionComponent } from '../../components/testimonials-section/testimonials-section.component';
 import { FAQSectionComponent } from '../../components/faq-section/faq-section.component';
 import { ContactSectionComponent } from '../../components/contact-section/contact-section.component';
@@ -29,6 +30,7 @@ import { WhatsAppButtonComponent } from '../../components/whatsapp-button/whatsa
     WhyPuneSectionComponent,
     WhyChooseSectionComponent,
     FoundersSectionComponent,
+    AchievementsSectionComponent,
     TestimonialsSectionComponent,
     FAQSectionComponent,
     ContactSectionComponent,

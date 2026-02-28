@@ -10,5 +10,5 @@ import { LucideAngularModule } from 'lucide-angular';
   styleUrls: ['./whatsapp-button.component.css']
 })
 export class WhatsAppButtonComponent {
-  whatsappUrl = 'https://wa.me/919011066839?text=Hi%2C%20I%27m%20interested%20in%20Garima%20Realty%20properties';
+  whatsappUrl = 'https://wa.me/9130084709?text=Hi%2C%20I%27m%20interested%20in%20Garima%20Realty%20properties';
 }
