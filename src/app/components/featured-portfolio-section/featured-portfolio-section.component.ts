@@ -41,6 +41,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   private autoSlideInterval?: any;
   selectedListing: FeaturedListing | null = null;
   private isScrolling = false; // Prevent multiple scrolls
+  private isAdvancing = false; // Prevent multiple advances
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -174,17 +175,8 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
         return;
       }
       
-      // Find the active card by data-index attribute or by index in NodeList
-      const listingBoxes = container.querySelectorAll('.listing-box');
-      let activeCard: HTMLElement | null = null;
-      
-      // Try to find by data-index first (most reliable)
-      activeCard = container.querySelector(`.listing-box[data-index="${this.currentIndex}"]`) as HTMLElement;
-      
-      // Fallback to NodeList index if data-index not found
-      if (!activeCard && listingBoxes.length > this.currentIndex) {
-        activeCard = listingBoxes[this.currentIndex] as HTMLElement;
-      }
+      // Find the active card by data-index attribute (most reliable)
+      const activeCard = container.querySelector(`.listing-box[data-index="${this.currentIndex}"]`) as HTMLElement;
       
       if (activeCard) {
         const containerHeight = container.clientHeight;
@@ -212,23 +204,23 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
           // Reset scrolling flag after scroll completes
           setTimeout(() => {
             this.isScrolling = false;
-          }, 500);
+          }, 600);
         } else {
           this.isScrolling = false;
         }
       } else {
         this.isScrolling = false;
       }
-    }, 200);
+    }, 300);
   }
 
   startAutoSlide(): void {
     this.stopAutoSlide(); // Ensure no duplicate intervals
     this.autoSlideInterval = setInterval(() => {
-      if (!this.isScrolling) {
-        this.next();
+      if (!this.isScrolling && !this.isAdvancing) {
+        this.advanceToNext();
       }
-    }, 5000);
+    }, 6000); // Increased to 6 seconds for better control
   }
 
   stopAutoSlide(): void {
@@ -237,45 +229,87 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
     }
   }
 
-  next(): void {
+  private advanceToNext(): void {
+    if (this.isAdvancing) return;
+    this.isAdvancing = true;
+    
     const nextIndex = (this.currentIndex + 1) % this.listings.length;
-    this.currentIndex = nextIndex;
-    this.selectedListing = this.listings[this.currentIndex];
-    this.cdr.detectChanges(); // Force change detection
+    this.updateIndex(nextIndex);
+    
     setTimeout(() => {
-      this.scrollToActiveCard();
-    }, 50);
+      this.isAdvancing = false;
+    }, 1000);
+  }
+
+  next(): void {
+    if (this.isAdvancing) return;
+    this.isAdvancing = true;
+    
+    const nextIndex = (this.currentIndex + 1) % this.listings.length;
+    this.updateIndex(nextIndex);
+    
+    setTimeout(() => {
+      this.isAdvancing = false;
+    }, 1000);
   }
 
   previous(): void {
+    if (this.isAdvancing) return;
+    this.isAdvancing = true;
+    
     const prevIndex = (this.currentIndex - 1 + this.listings.length) % this.listings.length;
-    this.currentIndex = prevIndex;
+    this.updateIndex(prevIndex);
+    
+    setTimeout(() => {
+      this.isAdvancing = false;
+    }, 1000);
+  }
+
+  private updateIndex(newIndex: number): void {
+    // Ensure index is valid
+    if (newIndex < 0 || newIndex >= this.listings.length) {
+      newIndex = 0;
+    }
+    
+    this.currentIndex = newIndex;
     this.selectedListing = this.listings[this.currentIndex];
     this.cdr.detectChanges(); // Force change detection
+    
+    // Scroll after a short delay to ensure DOM is updated
     setTimeout(() => {
       this.scrollToActiveCard();
-    }, 50);
+    }, 100);
   }
 
   selectListing(listing: FeaturedListing, index: number): void {
-    this.currentIndex = index;
-    this.selectedListing = listing;
-    this.cdr.detectChanges(); // Force change detection
+    if (this.isAdvancing) return;
+    this.isAdvancing = true;
+    
+    // Ensure index is valid
+    const validIndex = Math.max(0, Math.min(index, this.listings.length - 1));
+    this.updateIndex(validIndex);
+    
     this.stopAutoSlide();
     this.startAutoSlide();
+    
     setTimeout(() => {
-      this.scrollToActiveCard();
-    }, 50);
+      this.isAdvancing = false;
+    }, 1000);
   }
 
   goToSlide(index: number): void {
-    this.currentIndex = index;
-    this.selectedListing = this.listings[index];
-    this.cdr.detectChanges(); // Force change detection
+    if (this.isAdvancing) return;
+    this.isAdvancing = true;
+    
+    // Ensure index is valid
+    const validIndex = Math.max(0, Math.min(index, this.listings.length - 1));
+    this.updateIndex(validIndex);
+    
     this.stopAutoSlide();
     this.startAutoSlide();
+    
     setTimeout(() => {
-      this.scrollToActiveCard();
-    }, 50);
+      this.isAdvancing = false;
+    }, 1000);
   }
 }

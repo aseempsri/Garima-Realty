@@ -24,6 +24,7 @@
               class="listing-box group relative cursor-pointer transition-all duration-300"
               [class.active]="currentIndex === i"
               [attr.data-index]="i"
+              [attr.data-listing-number]="i + 1"
               (click)="selectListing(listing, i)"
               [@fadeInUp]
               [style.animation-delay]="(i * 50) + 'ms'"
