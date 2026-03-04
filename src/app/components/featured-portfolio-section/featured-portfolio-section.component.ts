@@ -41,6 +41,8 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   private autoSlideInterval?: any;
   selectedListing: FeaturedListing | null = null;
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   listings: FeaturedListing[] = [
     // Trump Towers - Images 1 & 2
     {
@@ -161,27 +163,39 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   private scrollToActiveCard(): void {
     if (!this.listingsContainer) return;
     
-    const container = this.listingsContainer.nativeElement;
-    const activeCard = container.querySelector(`.listing-box.active`);
-    
-    if (activeCard) {
-      const containerRect = container.getBoundingClientRect();
-      const cardRect = activeCard.getBoundingClientRect();
+    // Use setTimeout to ensure DOM is updated after Angular change detection
+    setTimeout(() => {
+      const container = this.listingsContainer.nativeElement;
+      if (!container) return;
       
-      // Calculate scroll position to center the card
-      const scrollTop = container.scrollTop;
-      const cardOffsetTop = (activeCard as HTMLElement).offsetTop;
-      const cardHeight = cardRect.height;
-      const containerHeight = containerRect.height;
+      // Find the active card by matching the current index
+      const listingBoxes = container.querySelectorAll('.listing-box');
+      const activeCard = listingBoxes[this.currentIndex] as HTMLElement;
       
-      // Center the card in the viewport
-      const targetScrollTop = cardOffsetTop - (containerHeight / 2) + (cardHeight / 2);
-      
-      container.scrollTo({
-        top: targetScrollTop,
-        behavior: 'smooth'
-      });
-    }
+      if (activeCard) {
+        const containerHeight = container.clientHeight;
+        const cardHeight = activeCard.offsetHeight;
+        const cardOffsetTop = activeCard.offsetTop;
+        const cardOffsetBottom = cardOffsetTop + cardHeight;
+        
+        // Get current scroll position
+        const scrollTop = container.scrollTop;
+        const scrollBottom = scrollTop + containerHeight;
+        
+        // Check if card is already visible
+        const isCardVisible = cardOffsetTop >= scrollTop && cardOffsetBottom <= scrollBottom;
+        
+        if (!isCardVisible) {
+          // Calculate scroll position to center the card
+          const targetScrollTop = cardOffsetTop - (containerHeight / 2) + (cardHeight / 2);
+          
+          container.scrollTo({
+            top: Math.max(0, targetScrollTop),
+            behavior: 'smooth'
+          });
+        }
+      }
+    }, 100);
   }
 
   startAutoSlide(): void {
@@ -199,18 +213,21 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   next(): void {
     this.currentIndex = (this.currentIndex + 1) % this.listings.length;
     this.selectedListing = this.listings[this.currentIndex];
+    this.cdr.detectChanges(); // Force change detection
     this.scrollToActiveCard();
   }
 
   previous(): void {
     this.currentIndex = (this.currentIndex - 1 + this.listings.length) % this.listings.length;
     this.selectedListing = this.listings[this.currentIndex];
+    this.cdr.detectChanges(); // Force change detection
     this.scrollToActiveCard();
   }
 
   selectListing(listing: FeaturedListing, index: number): void {
     this.currentIndex = index;
     this.selectedListing = listing;
+    this.cdr.detectChanges(); // Force change detection
     this.stopAutoSlide();
     this.startAutoSlide();
     this.scrollToActiveCard();
@@ -219,6 +236,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   goToSlide(index: number): void {
     this.currentIndex = index;
     this.selectedListing = this.listings[index];
+    this.cdr.detectChanges(); // Force change detection
     this.stopAutoSlide();
     this.startAutoSlide();
     this.scrollToActiveCard();

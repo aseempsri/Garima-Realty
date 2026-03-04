@@ -22,7 +22,8 @@
           @for (listing of listings; track listing.id; let i = $index) {
             <div
               class="listing-box group relative cursor-pointer transition-all duration-300"
-              [class.active]="selectedListing?.id === listing.id"
+              [class.active]="currentIndex === i"
+              [attr.data-index]="i"
               (click)="selectListing(listing, i)"
               [@fadeInUp]
               [style.animation-delay]="(i * 50) + 'ms'"
@@ -36,18 +37,18 @@
 
               <!-- Listing Card -->
               <div class="listing-card bg-charcoal-light/80 backdrop-blur-sm border-2 rounded-xl p-5 pl-16 md:pl-20 pr-4 md:pr-5 transition-all duration-300"
-                   [class.border-gold]="selectedListing?.id === listing.id"
-                   [class.border-white/10]="selectedListing?.id !== listing.id"
-                   [class.shadow-xl]="selectedListing?.id === listing.id"
-                   [class.shadow-lg]="selectedListing?.id !== listing.id"
-                   [class.active-card]="selectedListing?.id === listing.id">
+                   [class.border-gold]="currentIndex === i"
+                   [class.border-white/10]="currentIndex !== i"
+                   [class.shadow-xl]="currentIndex === i"
+                   [class.shadow-lg]="currentIndex !== i"
+                   [class.active-card]="currentIndex === i">
                 
                 <!-- Category Tag -->
                 <div class="flex items-center justify-between mb-2 gap-2">
                   <span class="listing-category text-gold/80 text-xs font-sans uppercase tracking-wider flex-shrink-0">
                     {{ listing.category }}
                   </span>
-                  @if (selectedListing?.id === listing.id) {
+                  @if (currentIndex === i) {
                     <div class="w-2 h-2 rounded-full bg-gold animate-pulse" aria-hidden="true"></div>
                   }
                 </div>
