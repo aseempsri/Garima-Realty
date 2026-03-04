@@ -88,6 +88,11 @@
   transform: translateX(4px);
 }
 
+/* Ensure active state is visible */
+.listing-box.active {
+  z-index: 1;
+}
+
 /* Golden glow effect for active card */
 .listing-card.active-card {
   box-shadow: 

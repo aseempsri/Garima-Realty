@@ -161,16 +161,24 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   }
 
   private scrollToActiveCard(): void {
-    if (!this.listingsContainer) return;
+    if (!this.listingsContainer?.nativeElement) return;
     
     // Use setTimeout to ensure DOM is updated after Angular change detection
     setTimeout(() => {
       const container = this.listingsContainer.nativeElement;
       if (!container) return;
       
-      // Find the active card by matching the current index
+      // Find the active card by data-index attribute or by index in NodeList
       const listingBoxes = container.querySelectorAll('.listing-box');
-      const activeCard = listingBoxes[this.currentIndex] as HTMLElement;
+      let activeCard: HTMLElement | null = null;
+      
+      // Try to find by data-index first
+      activeCard = container.querySelector(`[data-index="${this.currentIndex}"]`) as HTMLElement;
+      
+      // Fallback to NodeList index if data-index not found
+      if (!activeCard && listingBoxes[this.currentIndex]) {
+        activeCard = listingBoxes[this.currentIndex] as HTMLElement;
+      }
       
       if (activeCard) {
         const containerHeight = container.clientHeight;
@@ -182,8 +190,9 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
         const scrollTop = container.scrollTop;
         const scrollBottom = scrollTop + containerHeight;
         
-        // Check if card is already visible
-        const isCardVisible = cardOffsetTop >= scrollTop && cardOffsetBottom <= scrollBottom;
+        // Check if card is already visible (with some padding)
+        const padding = 20;
+        const isCardVisible = (cardOffsetTop >= scrollTop - padding) && (cardOffsetBottom <= scrollBottom + padding);
         
         if (!isCardVisible) {
           // Calculate scroll position to center the card
@@ -195,7 +204,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
           });
         }
       }
-    }, 100);
+    }, 150);
   }
 
   startAutoSlide(): void {
@@ -211,17 +220,23 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   }
 
   next(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.listings.length;
+    const nextIndex = (this.currentIndex + 1) % this.listings.length;
+    this.currentIndex = nextIndex;
     this.selectedListing = this.listings[this.currentIndex];
     this.cdr.detectChanges(); // Force change detection
-    this.scrollToActiveCard();
+    setTimeout(() => {
+      this.scrollToActiveCard();
+    }, 50);
   }
 
   previous(): void {
-    this.currentIndex = (this.currentIndex - 1 + this.listings.length) % this.listings.length;
+    const prevIndex = (this.currentIndex - 1 + this.listings.length) % this.listings.length;
+    this.currentIndex = prevIndex;
     this.selectedListing = this.listings[this.currentIndex];
     this.cdr.detectChanges(); // Force change detection
-    this.scrollToActiveCard();
+    setTimeout(() => {
+      this.scrollToActiveCard();
+    }, 50);
   }
 
   selectListing(listing: FeaturedListing, index: number): void {
@@ -230,7 +245,9 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
     this.cdr.detectChanges(); // Force change detection
     this.stopAutoSlide();
     this.startAutoSlide();
-    this.scrollToActiveCard();
+    setTimeout(() => {
+      this.scrollToActiveCard();
+    }, 50);
   }
 
   goToSlide(index: number): void {
@@ -239,6 +256,8 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
     this.cdr.detectChanges(); // Force change detection
     this.stopAutoSlide();
     this.startAutoSlide();
-    this.scrollToActiveCard();
+    setTimeout(() => {
+      this.scrollToActiveCard();
+    }, 50);
   }
 }
