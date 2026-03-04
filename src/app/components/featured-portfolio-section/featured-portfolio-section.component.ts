@@ -40,6 +40,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   currentIndex = 0;
   private autoSlideInterval?: any;
   selectedListing: FeaturedListing | null = null;
+  private isScrolling = false; // Prevent multiple scrolls
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -161,22 +162,27 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   }
 
   private scrollToActiveCard(): void {
-    if (!this.listingsContainer?.nativeElement) return;
+    if (!this.listingsContainer?.nativeElement || this.isScrolling) return;
+    
+    this.isScrolling = true;
     
     // Use setTimeout to ensure DOM is updated after Angular change detection
     setTimeout(() => {
       const container = this.listingsContainer.nativeElement;
-      if (!container) return;
+      if (!container) {
+        this.isScrolling = false;
+        return;
+      }
       
       // Find the active card by data-index attribute or by index in NodeList
       const listingBoxes = container.querySelectorAll('.listing-box');
       let activeCard: HTMLElement | null = null;
       
-      // Try to find by data-index first
-      activeCard = container.querySelector(`[data-index="${this.currentIndex}"]`) as HTMLElement;
+      // Try to find by data-index first (most reliable)
+      activeCard = container.querySelector(`.listing-box[data-index="${this.currentIndex}"]`) as HTMLElement;
       
       // Fallback to NodeList index if data-index not found
-      if (!activeCard && listingBoxes[this.currentIndex]) {
+      if (!activeCard && listingBoxes.length > this.currentIndex) {
         activeCard = listingBoxes[this.currentIndex] as HTMLElement;
       }
       
@@ -191,7 +197,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
         const scrollBottom = scrollTop + containerHeight;
         
         // Check if card is already visible (with some padding)
-        const padding = 20;
+        const padding = 50;
         const isCardVisible = (cardOffsetTop >= scrollTop - padding) && (cardOffsetBottom <= scrollBottom + padding);
         
         if (!isCardVisible) {
@@ -202,14 +208,26 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
             top: Math.max(0, targetScrollTop),
             behavior: 'smooth'
           });
+          
+          // Reset scrolling flag after scroll completes
+          setTimeout(() => {
+            this.isScrolling = false;
+          }, 500);
+        } else {
+          this.isScrolling = false;
         }
+      } else {
+        this.isScrolling = false;
       }
-    }, 150);
+    }, 200);
   }
 
   startAutoSlide(): void {
+    this.stopAutoSlide(); // Ensure no duplicate intervals
     this.autoSlideInterval = setInterval(() => {
-      this.next();
+      if (!this.isScrolling) {
+        this.next();
+      }
     }, 5000);
   }
 
