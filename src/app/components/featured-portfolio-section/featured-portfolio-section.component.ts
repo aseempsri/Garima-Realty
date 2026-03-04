@@ -42,119 +42,101 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
   selectedListing: FeaturedListing | null = null;
 
   listings: FeaturedListing[] = [
-    // Existing featured properties
+    // Trump Towers - Images 1 & 2
     {
       id: 1,
-      name: 'Casa Elanza',
-      location: 'Koregaon Park Annexe, Pune',
-      configuration: '5BHK Luxury Homes',
-      price: '₹18 Cr',
-      category: 'Ultra Premium',
+      name: 'Trump Towers',
+      location: 'Kalyani Nagar, Pune',
+      configuration: '5.5 BHK',
+      price: '₹15 Cr onwards',
+      category: 'Residential',
       date: 'Recent',
-      image: 'assets/IMG-20260225-WA0000.jpg'
+      image: 'assets/image 1.jpg'
     },
     {
       id: 2,
-      name: 'Trump World Trade Center',
-      location: 'Koregaon Park, Pune',
-      configuration: 'Commercial & Investment',
-      price: '₹8 Cr',
-      category: 'Investment',
+      name: 'Trump Towers',
+      location: 'Kalyani Nagar, Pune',
+      configuration: '5.5 BHK',
+      price: '₹15 Cr onwards',
+      category: 'Residential',
       date: 'Recent',
-      image: 'assets/IMG-20260225-WA0001.jpg'
+      image: 'assets/image 2.jpg'
     },
+    // Yoo Villas - Images 3 & 4
     {
       id: 3,
-      name: 'Bavdhan Land Parcel',
-      location: 'Bavdhan, Pune',
-      configuration: '8 Acres — Development Land',
-      price: '₹175 Cr',
-      category: 'Exclusive',
+      name: 'Yoo Villas',
+      location: 'Kharadi, Pune',
+      configuration: '4.5 BHK',
+      price: '₹13 Cr onwards',
+      category: 'Residential',
       date: 'Recent',
-      image: 'assets/IMG-20260225-WA0002.jpg'
+      image: 'assets/image 3.jpg'
     },
-    // New listings - Luxury Resale Homes — West Pune
     {
       id: 4,
-      name: 'Amar Landmark',
-      location: 'West Pune',
+      name: 'Yoo Villas',
+      location: 'Kharadi, Pune',
       configuration: '4.5 BHK',
-      price: '₹11 Cr',
-      category: 'Luxury Resale',
-      date: 'Jan 2025',
-      image: 'assets/IMG-20260225-WA0003.jpg'
+      price: '₹13 Cr onwards',
+      category: 'Residential',
+      date: 'Recent',
+      image: 'assets/image 4.jpg'
     },
+    // Yoo Pune - Image 5
     {
       id: 5,
-      name: 'Supreme Amadore',
-      location: 'West Pune',
-      configuration: '4.5 BHK',
-      price: '₹7.5 Cr',
-      category: 'Luxury Resale',
-      date: 'Dec 2024',
-      image: 'assets/IMG-20260225-WA0004.jpg'
+      name: 'Yoo Pune',
+      location: 'Magarpatta, Pune',
+      configuration: '4.5 BHK & 5.5 BHK',
+      price: '₹12 Cr onwards',
+      category: 'Residential',
+      date: 'Recent',
+      image: 'assets/image 5.jpg'
     },
+    // Total Environment - Images 6 & 7
     {
       id: 6,
-      name: 'Kumar Sanctum',
-      location: 'West Pune',
-      configuration: '4 Apts',
-      price: '₹15 Cr',
-      category: 'Luxury Resale',
-      date: 'Nov 2024',
-      image: 'assets/IMG-20260225-WA0005.jpg'
+      name: 'Total Environment',
+      location: 'Sopan Baug, Pune',
+      configuration: '3.5 BHK & 4.5 BHK',
+      price: '₹7 Cr - ₹15 Cr',
+      category: 'Residential',
+      date: 'Recent',
+      image: 'assets/image 6.jpeg'
     },
-    // East Pune & Boat Club Road
     {
       id: 7,
-      name: 'Supreme Adimaa',
-      location: 'East Pune & Boat Club Road',
-      configuration: '5.5 BHK',
-      price: '₹19 Cr',
-      category: 'Premium',
-      date: 'Oct 2024',
-      image: 'assets/IMG-20260225-WA0006.jpg'
+      name: 'Total Environment',
+      location: 'Sopan Baug, Pune',
+      configuration: '3.5 BHK & 4.5 BHK',
+      price: '₹7 Cr - ₹15 Cr',
+      category: 'Residential',
+      date: 'Recent',
+      image: 'assets/image 7.jpeg'
     },
+    // Trump World Centre - Image 8
     {
       id: 8,
-      name: 'Ajmera Aria',
-      location: 'East Pune & Boat Club Road',
-      configuration: '4.5 BHK',
-      price: '₹16 Cr',
-      category: 'Premium',
-      date: 'Sep 2024',
-      image: 'assets/IMG-20260225-WA0007.jpg'
+      name: 'Trump World Centre',
+      location: 'Mundhwa, Pune',
+      configuration: 'Commercial',
+      price: '₹7 Cr onwards',
+      category: 'Commercial',
+      date: 'Recent',
+      image: 'assets/image 8.jpeg'
     },
+    // Amar Westview - Image 9
     {
       id: 9,
-      name: 'Windermere Duplex',
-      location: 'East Pune & Boat Club Road',
-      configuration: 'Duplex',
-      price: '₹8.99 Cr',
-      category: 'Premium',
-      date: 'Aug 2024',
-      image: 'assets/IMG-20260225-WA0008.jpg'
-    },
-    // Bungalows & Plots
-    {
-      id: 10,
-      name: 'Forest Trails',
-      location: 'Pune',
-      configuration: '4 BHK',
-      price: '₹4.75 Cr',
-      category: 'Bungalow',
-      date: 'Jul 2024',
-      image: 'assets/IMG-20260225-WA0009.jpg'
-    },
-    {
-      id: 11,
-      name: 'Bhugaon 1 Acre Plot',
-      location: 'Bhugaon, Pune',
-      configuration: '1 Acre Plot',
-      price: '₹6 Cr',
-      category: 'Plot',
-      date: 'Jun 2024',
-      image: 'assets/IMG-20260225-WA0010.jpg'
+      name: 'Amar Westview',
+      location: 'Koregaon Park, Pune',
+      configuration: 'Residential',
+      price: '₹15 Cr onwards',
+      category: 'Residential',
+      date: 'Recent',
+      image: 'assets/image 9.jpeg'
     }
   ];
 
