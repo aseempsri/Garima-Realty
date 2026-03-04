@@ -78,7 +78,7 @@
 }
 
 .listing-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Faster transition to match carousel */
   position: relative;
   overflow: visible;
 }
@@ -86,6 +86,7 @@
 .listing-box.active .listing-card {
   background: hsl(var(--charcoal-light) / 0.95);
   transform: translateX(4px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Faster highlight transition */
 }
 
 /* Ensure active state is visible */
@@ -123,6 +124,11 @@
     opacity: 0.9;
     transform: scale(1.02);
   }
+}
+
+/* Faster glow animation to match carousel speed */
+.listing-box.active::before {
+  animation-duration: 1.5s; /* Faster pulse (was 2s) */
 }
 
 .listing-box:hover .listing-card {

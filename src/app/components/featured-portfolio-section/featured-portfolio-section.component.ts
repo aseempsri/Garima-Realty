@@ -201,17 +201,17 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
             behavior: 'smooth'
           });
           
-          // Reset scrolling flag after scroll completes
+          // Reset scrolling flag faster to match carousel speed
           setTimeout(() => {
             this.isScrolling = false;
-          }, 600);
+          }, 400);
         } else {
           this.isScrolling = false;
         }
       } else {
         this.isScrolling = false;
       }
-    }, 300);
+    }, 150); // Faster delay to match carousel speed
   }
 
   startAutoSlide(): void {
@@ -220,7 +220,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
       if (!this.isScrolling && !this.isAdvancing) {
         this.advanceToNext();
       }
-    }, 6000); // Increased to 6 seconds for better control
+    }, 3000); // 50% faster: 3 seconds (was 6 seconds)
   }
 
   stopAutoSlide(): void {
@@ -238,7 +238,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
     
     setTimeout(() => {
       this.isAdvancing = false;
-    }, 1000);
+    }, 500); // Faster cooldown to match carousel speed
   }
 
   next(): void {
@@ -250,7 +250,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
     
     setTimeout(() => {
       this.isAdvancing = false;
-    }, 1000);
+    }, 500); // Faster cooldown to match carousel speed
   }
 
   previous(): void {
@@ -262,7 +262,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
     
     setTimeout(() => {
       this.isAdvancing = false;
-    }, 1000);
+    }, 500); // Faster cooldown to match carousel speed
   }
 
   private updateIndex(newIndex: number): void {
@@ -275,10 +275,10 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
     this.selectedListing = this.listings[this.currentIndex];
     this.cdr.detectChanges(); // Force change detection
     
-    // Scroll after a short delay to ensure DOM is updated
+    // Scroll faster to match carousel speed
     setTimeout(() => {
       this.scrollToActiveCard();
-    }, 100);
+    }, 50);
   }
 
   selectListing(listing: FeaturedListing, index: number): void {
@@ -294,7 +294,7 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
     
     setTimeout(() => {
       this.isAdvancing = false;
-    }, 1000);
+    }, 500); // Faster cooldown to match carousel speed
   }
 
   goToSlide(index: number): void {
@@ -310,6 +310,6 @@ export class FeaturedPortfolioSectionComponent implements OnInit, OnDestroy, Aft
     
     setTimeout(() => {
       this.isAdvancing = false;
-    }, 1000);
+    }, 500); // Faster cooldown to match carousel speed
   }
 }
