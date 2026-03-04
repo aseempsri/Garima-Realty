@@ -200,7 +200,7 @@
 
 .portrait-thumbnail {
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease; /* Faster to match carousel */
 }
 
 .portrait-thumbnail:hover {
