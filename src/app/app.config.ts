@@ -30,6 +30,9 @@ import {
   Trophy,
   Award,
   Check,
+  Compass,
+  Smartphone,
+  ShieldCheck,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -64,6 +67,9 @@ export const appConfig: ApplicationConfig = {
         Trophy,
         Award,
         Check,
+        Compass,
+        Smartphone,
+        ShieldCheck,
       })
     ),
   ],
