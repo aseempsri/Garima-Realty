@@ -1,1 +1,12 @@
-/* Component-specific styles if needed */
+/* Contact section - creative card layout */
+.contact-card {
+  text-decoration: none;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+}
+
+.contact-icon-wrapper {
+  transition: transform 0.3s ease;
+}
