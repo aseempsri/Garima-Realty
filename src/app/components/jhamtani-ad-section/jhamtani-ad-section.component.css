@@ -1,0 +1,45 @@
+/* Jhamtani Ad Section - Editorial full-bleed design */
+
+.jhamtani-ad-section {
+  position: relative;
+  min-height: 85vh;
+  overflow: hidden;
+}
+
+/* Hero background - image fills section */
+.jhamtani-hero-bg {
+  isolation: isolate;
+}
+
+.jhamtani-hero-bg img {
+  will-change: opacity;
+}
+
+/* Thumbnail strip */
+.jhamtani-thumb {
+  opacity: 0.7;
+}
+
+.jhamtani-thumb:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.jhamtani-thumb-active {
+  opacity: 1;
+}
+
+.jhamtani-thumb-active:hover {
+  transform: none;
+}
+
+/* Hide scrollbar but allow scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
