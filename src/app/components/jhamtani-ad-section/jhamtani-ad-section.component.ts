@@ -36,37 +36,37 @@ export class JhamtaniAdSectionComponent implements OnInit, OnDestroy {
   projects: JhamtaniProject[] = [
     {
       id: 1,
-      name: 'Bizcore',
-      type: 'Pre leased Studios',
-      configuration: 'Studio',
-      price: '₹45 Lacs onwards',
+      name: 'Ace Villas',
+      type: 'Villa',
+      configuration: '4.5 BHK',
+      price: '₹10 Cr onwards',
       location: 'Mundhwa',
       image: 'assets/image 1_1.jpg'
     },
     {
       id: 2,
-      name: 'Bizcore',
-      type: 'Pre leased Studios',
-      configuration: 'Studio',
-      price: '₹45 Lacs onwards',
+      name: 'Ace Villas',
+      type: 'Villa',
+      configuration: '4.5 BHK',
+      price: '₹10 Cr onwards',
       location: 'Mundhwa',
       image: 'assets/image 1_2.jpg'
     },
     {
       id: 3,
-      name: 'Ace Villas',
-      type: 'Villa',
-      configuration: '4.5 BHK',
-      price: '₹10 Cr onwards',
+      name: 'Bizcore',
+      type: 'Pre leased Studios',
+      configuration: 'Studio',
+      price: '₹45 Lacs onwards',
       location: 'Mundhwa',
       image: 'assets/image 1_3.jpg'
     },
     {
       id: 4,
-      name: 'Ace Villas',
-      type: 'Villa',
-      configuration: '4.5 BHK',
-      price: '₹10 Cr onwards',
+      name: 'Bizcore',
+      type: 'Pre leased Studios',
+      configuration: 'Studio',
+      price: '₹45 Lacs onwards',
       location: 'Mundhwa',
       image: 'assets/image 1_4.jpg'
     },
