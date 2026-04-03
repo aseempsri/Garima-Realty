@@ -3,11 +3,18 @@ import {
   Component,
   ElementRef,
   HostListener,
+  OnDestroy,
   signal,
   viewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
+
+interface PanchshilCarouselSlide {
+  src: string;
+  headline: string;
+  caption: string;
+}
 
 @Component({
   selector: 'app-panchshil-kharadi-section',
@@ -16,7 +23,7 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './panchshil-kharadi-section.component.html',
   styleUrls: ['./panchshil-kharadi-section.component.css'],
 })
-export class PanchshilKharadiSectionComponent {
+export class PanchshilKharadiSectionComponent implements OnDestroy {
   readonly videoSrc = 'assets/panchshilKharadi/MicrosoftTeams-video.mp4';
 
   @HostListener('document:keydown.escape')
@@ -29,7 +36,35 @@ export class PanchshilKharadiSectionComponent {
   readonly shareModalOpen = signal(false);
   readonly linkCopied = signal(false);
 
+  readonly carouselSlides: PanchshilCarouselSlide[] = [
+    {
+      src: 'assets/panchshilKharadi/shared%20image%20(3).jpg',
+      headline: 'Perfectly positioned',
+      caption: 'Twin towers, pool & skyline — Mundhwa at the heart of Pune’s eastern corridor.',
+    },
+    {
+      src: 'assets/panchshilKharadi/shared%20image%20(4).jpg',
+      headline: 'A new landmark',
+      caption: '3.5 & 4.5 BHK residences — architecture that defines the skyline.',
+    },
+    {
+      src: 'assets/panchshilKharadi/shared%20image%20(5).jpg',
+      headline: 'Infinite ways to indulge',
+      caption: 'Clubhouse, recreation & wellness — spaces for a life well lived.',
+    },
+    {
+      src: 'assets/panchshilKharadi/shared%20image%20(6).jpg',
+      headline: 'Design in the details',
+      caption: 'Layouts that flow into balconies framing sweeping city views.',
+    },
+  ];
+
+  readonly carouselIndex = signal(0);
+  readonly carouselPaused = signal(false);
+
   private copyResetTimer?: ReturnType<typeof setTimeout>;
+  private carouselAutoTimer?: ReturnType<typeof setInterval>;
+  private touchStartX = 0;
 
   private readonly videoRef = viewChild<ElementRef<HTMLVideoElement>>('panchshilVideo');
 
@@ -40,6 +75,52 @@ export class PanchshilKharadiSectionComponent {
         this.ensureVideoPlays(el);
       }
     });
+    this.carouselAutoTimer = setInterval(() => {
+      if (!this.carouselPaused()) {
+        this.advanceCarousel(1);
+      }
+    }, 6500);
+  }
+
+  ngOnDestroy(): void {
+    if (this.carouselAutoTimer) {
+      clearInterval(this.carouselAutoTimer);
+    }
+    if (this.copyResetTimer) {
+      clearTimeout(this.copyResetTimer);
+    }
+  }
+
+  advanceCarousel(delta: number): void {
+    const n = this.carouselSlides.length;
+    if (n === 0) {
+      return;
+    }
+    this.carouselIndex.update((i) => (i + delta + n) % n);
+  }
+
+  goCarousel(i: number): void {
+    if (i >= 0 && i < this.carouselSlides.length) {
+      this.carouselIndex.set(i);
+    }
+  }
+
+  onCarouselTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.touches[0].clientX;
+  }
+
+  onCarouselTouchEnd(event: TouchEvent): void {
+    const x = event.changedTouches[0].clientX;
+    const dx = x - this.touchStartX;
+    if (dx > 56) {
+      this.advanceCarousel(-1);
+    } else if (dx < -56) {
+      this.advanceCarousel(1);
+    }
+  }
+
+  currentCarouselSlide(): PanchshilCarouselSlide {
+    return this.carouselSlides[this.carouselIndex()] ?? this.carouselSlides[0];
   }
 
   onVideoMetadata(video: HTMLVideoElement): void {

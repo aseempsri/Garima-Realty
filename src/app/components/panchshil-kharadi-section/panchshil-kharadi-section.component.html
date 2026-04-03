@@ -232,6 +232,118 @@
           </ul>
         </article>
       </div>
+
+      <!-- 57 Avenue — list left, hero image right (featured-listings style) -->
+      <div
+        class="panchshil-carousel mt-16 md:mt-24"
+        (mouseenter)="carouselPaused.set(true)"
+        (mouseleave)="carouselPaused.set(false)"
+      >
+        <div class="mb-8 md:mb-10 max-w-2xl">
+          <p class="text-gold/90 text-xs font-sans uppercase tracking-[0.28em]">57 Avenue · Mundhwa</p>
+          <h3 class="mt-3 font-serif text-3xl md:text-4xl lg:text-[2.75rem] text-white tracking-tight leading-tight">
+            Presentation gallery
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch min-w-0">
+          <!-- Left 50%: scrollable text cards -->
+          <div class="flex flex-col min-h-0 min-w-0 order-2 lg:order-1">
+            <p
+              class="text-[10px] font-sans uppercase tracking-[0.22em] text-white/40 mb-3 hidden lg:block"
+            >
+              Select a view
+            </p>
+            <div
+              class="panchshil-gallery-scroll flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto lg:max-h-[min(72dvh,720px)] pb-1 -mx-1 px-1 lg:mx-0 lg:px-0 lg:pr-2 snap-x snap-mandatory lg:snap-none scroll-pl-1"
+            >
+              @for (slide of carouselSlides; track slide.src; let i = $index) {
+                <button
+                  type="button"
+                  (click)="goCarousel(i)"
+                  class="panchshil-gallery-card snap-start"
+                  [class.panchshil-gallery-card--active]="carouselIndex() === i"
+                  [attr.aria-current]="carouselIndex() === i ? 'true' : null"
+                >
+                  <span
+                    class="inline-flex items-center gap-2 text-[10px] font-sans uppercase tracking-[0.18em] text-gold/85"
+                  >
+                    Artist’s impression
+                    <span class="text-white/25">·</span>
+                    <span class="tabular-nums text-white/50">{{ i + 1 }}/{{ carouselSlides.length }}</span>
+                  </span>
+                  <span
+                    class="absolute top-3 right-3 h-2 w-2 rounded-full border border-white/20 transition-colors"
+                    [class.bg-gold]="carouselIndex() === i"
+                    [class.border-gold/60]="carouselIndex() === i"
+                    [class.bg-transparent]="carouselIndex() !== i"
+                    aria-hidden="true"
+                  ></span>
+                  <h4 class="mt-3 font-serif text-lg md:text-xl text-white leading-snug pr-6 text-left">
+                    {{ slide.headline }}
+                  </h4>
+                  <p class="mt-2 text-sm text-white/55 font-sans leading-relaxed text-left line-clamp-3">
+                    {{ slide.caption }}
+                  </p>
+                </button>
+              }
+            </div>
+          </div>
+
+          <!-- Right 50%: image carousel (full bleed inside column) -->
+          <div class="order-1 lg:order-2 min-h-0 min-w-0">
+            <div
+              class="relative rounded-2xl overflow-hidden ring-1 ring-gold/25 shadow-2xl shadow-black/50 bg-charcoal panchshil-gallery-stage w-full"
+              (touchstart)="onCarouselTouchStart($event)"
+              (touchend)="onCarouselTouchEnd($event)"
+            >
+              <div
+                class="absolute top-3 right-3 md:top-4 md:right-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-white/10 text-xs font-sans text-white/90 tabular-nums"
+              >
+                {{ carouselIndex() + 1 }}/{{ carouselSlides.length }}
+              </div>
+
+              <button
+                type="button"
+                (click)="advanceCarousel(-1)"
+                class="panchshil-gallery-arrow panchshil-gallery-arrow--prev"
+                aria-label="Previous image"
+              >
+                <lucide-icon name="chevron-left" class="w-6 h-6" stroke-width="2"></lucide-icon>
+              </button>
+              <button
+                type="button"
+                (click)="advanceCarousel(1)"
+                class="panchshil-gallery-arrow panchshil-gallery-arrow--next"
+                aria-label="Next image"
+              >
+                <lucide-icon name="chevron-right" class="w-6 h-6" stroke-width="2"></lucide-icon>
+              </button>
+
+              <div class="relative z-0 w-full panchshil-gallery-image-box">
+                <img
+                  [src]="currentCarouselSlide().src"
+                  [alt]="currentCarouselSlide().headline + ' — 57 Avenue Mundhwa'"
+                  class="panchshil-gallery-hero-img"
+                  loading="lazy"
+                />
+              </div>
+
+              <div
+                class="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/88 via-black/45 to-transparent pt-28 pb-5 md:pb-7 px-4 md:px-6"
+              >
+                <p class="text-[10px] font-sans uppercase tracking-[0.22em] text-gold/90">Residential · Mundhwa</p>
+                <p class="mt-2 font-serif text-2xl md:text-3xl lg:text-4xl text-white leading-tight">
+                  {{ currentCarouselSlide().headline }}
+                </p>
+                <p class="mt-2 text-sm md:text-base text-white/65 font-sans leading-relaxed max-w-2xl line-clamp-2">
+                  {{ currentCarouselSlide().caption }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
