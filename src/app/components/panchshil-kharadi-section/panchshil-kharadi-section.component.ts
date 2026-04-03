@@ -87,7 +87,7 @@ export class PanchshilKharadiSectionComponent {
     return `${window.location.origin}/assets/panchshilKharadi/57%20av.webp`;
   }
 
-  /** Full message for WhatsApp / copy-as-text; includes public image URL (wa.me cannot attach files). */
+  /** Full message for WhatsApp / native share text; ends with the page link only (no separate photo URL). */
   shareMessagePlain(): string {
     return [
       'Panchshil Mundhwa',
@@ -96,8 +96,6 @@ export class PanchshilKharadiSectionComponent {
       '• Units: 3.5 BHK (2,033 sq.ft.) from ₹4.25 Cr; exclusive 4.5 BHK (3,522 sq.ft.) at ₹8 Cr.',
       '• Specs: 27 floors, 4 units per floor, and high-speed elevators.',
       '• Launch: Mid-November 2025; ₹25 lakh token required.',
-      '',
-      `Photo: ${this.shareImageUrl()}`,
       '',
       this.sharePageUrl(),
     ].join('\n');
