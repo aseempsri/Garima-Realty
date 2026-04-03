@@ -33,6 +33,10 @@ import {
   Compass,
   Smartphone,
   ShieldCheck,
+  Share2,
+  Copy,
+  Facebook,
+  Twitter,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -70,6 +74,10 @@ export const appConfig: ApplicationConfig = {
         Compass,
         Smartphone,
         ShieldCheck,
+        Share2,
+        Copy,
+        Facebook,
+        Twitter,
       })
     ),
   ],

@@ -1,0 +1,237 @@
+<section id="panchshil-mundhwa" class="panchshil-section relative bg-charcoal text-white">
+  <!-- Mobile: video banner + copy below · md+: full-viewport video with overlaid copy -->
+  <div
+    class="panchshil-video-hero relative w-full isolate flex flex-col bg-charcoal md:block md:min-h-screen md:overflow-hidden"
+  >
+    <div
+      class="relative w-full shrink-0 overflow-hidden aspect-[16/9] max-h-[min(46vh,300px)] sm:max-h-[min(50vh,340px)] md:absolute md:inset-0 md:aspect-auto md:max-h-none md:min-h-screen md:h-full"
+    >
+      <video
+        #panchshilVideo
+        class="panchshil-video absolute inset-0 h-full w-full max-w-none max-h-none object-cover"
+        [muted]="true"
+        defaultMuted
+        loop
+        playsinline
+        [attr.webkit-playsinline]="''"
+        preload="auto"
+        aria-label="Panchshil Mundhwa — project film"
+        (loadedmetadata)="onVideoMetadata(panchshilVideo)"
+        (loadeddata)="ensureVideoPlays(panchshilVideo)"
+        (canplay)="ensureVideoPlays(panchshilVideo)"
+      >
+        <source [src]="videoSrc" type="video/mp4" />
+      </video>
+      <div
+        class="md:hidden absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent pointer-events-none"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="hidden md:block absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/22 to-charcoal/38 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="hidden md:block absolute inset-0 bg-gradient-to-r from-charcoal/55 via-transparent to-charcoal/28 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+    </div>
+
+    <div
+      class="relative z-10 w-full flex flex-col py-8 pb-12 md:py-0 md:min-h-screen md:absolute md:inset-0 md:justify-end md:pb-24 md:pt-32"
+    >
+      <div class="container mx-auto px-6 md:px-8">
+        <div class="max-w-3xl">
+          <p class="text-gold/85 text-xs font-sans uppercase tracking-[0.28em] mb-3 md:mb-4">Featured development</p>
+          <h2
+            class="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.08] tracking-tight text-white flex flex-wrap items-baseline gap-x-3 md:gap-x-4 gap-y-2"
+          >
+            <span class="whitespace-nowrap">Panchshil</span>
+            <span class="inline-flex items-center gap-2 md:gap-3">
+              <span>Mundhwa</span>
+              <button
+                type="button"
+                (click)="openShareModal(); $event.stopPropagation()"
+                class="inline-flex shrink-0 rounded-full p-1.5 md:p-2 text-white/55 hover:text-gold border border-transparent hover:border-gold/20 hover:bg-white/[0.06] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/45 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal md:focus-visible:ring-offset-charcoal"
+                aria-haspopup="dialog"
+                [attr.aria-expanded]="shareModalOpen()"
+                aria-label="Open share options"
+              >
+                <lucide-icon name="share-2" class="w-[1.15rem] h-[1.15rem] md:w-5 md:h-5" stroke-width="1.85"></lucide-icon>
+              </button>
+            </span>
+          </h2>
+          <p class="mt-4 md:mt-5 text-base sm:text-lg md:text-xl text-white/75 font-sans max-w-xl">
+            Luxury. Exclusivity. Elegance.
+          </p>
+          <div class="mt-6 md:mt-8 h-px w-24 gold-gradient opacity-90" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (shareModalOpen()) {
+    <div
+      class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-charcoal/55 backdrop-blur-[3px]"
+      (click)="closeShareModal()"
+      role="presentation"
+    >
+      <div
+        class="panchshil-share-popover relative flex items-center gap-0.5 rounded-xl border border-white/10 bg-charcoal-light/92 backdrop-blur-md p-1 shadow-2xl shadow-black/50 ring-1 ring-gold/[0.12]"
+        (click)="$event.stopPropagation()"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Share options"
+      >
+        <button
+          type="button"
+          (click)="shareViaWhatsApp()"
+          class="panchshil-share-icon-btn"
+          title="WhatsApp"
+          aria-label="Share on WhatsApp"
+        >
+          <lucide-icon name="message-circle" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+        <button
+          type="button"
+          (click)="shareViaFacebook()"
+          class="panchshil-share-icon-btn"
+          title="Facebook"
+          aria-label="Share on Facebook"
+        >
+          <lucide-icon name="facebook" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+        <button
+          type="button"
+          (click)="shareViaTwitter()"
+          class="panchshil-share-icon-btn"
+          title="X (Twitter)"
+          aria-label="Share on X"
+        >
+          <lucide-icon name="twitter" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+        <button
+          type="button"
+          (click)="copyShareLink()"
+          class="panchshil-share-icon-btn"
+          [class.panchshil-share-icon-btn--active]="linkCopied()"
+          [attr.title]="linkCopied() ? 'Copied' : 'Copy link'"
+          [attr.aria-label]="linkCopied() ? 'Link copied' : 'Copy page link'"
+        >
+          <lucide-icon [name]="linkCopied() ? 'check' : 'copy'" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+        <span class="mx-0.5 h-7 w-px shrink-0 bg-white/10 self-center" aria-hidden="true"></span>
+        <button
+          type="button"
+          (click)="closeShareModal()"
+          class="panchshil-share-icon-btn panchshil-share-icon-btn--close"
+          title="Close"
+          aria-label="Close"
+        >
+          <lucide-icon name="x" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Brochure data + visual gallery -->
+  <div class="relative bg-gradient-to-b from-charcoal via-charcoal-light/30 to-charcoal overflow-hidden">
+    <div
+      class="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,hsl(var(--gold))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--gold))_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(90%,720px)] h-64 bg-gold/10 blur-[100px] rounded-full pointer-events-none"
+      aria-hidden="true"
+    ></div>
+
+    <div class="container mx-auto px-6 md:px-8 py-16 md:py-24 relative z-10">
+      <header class="text-center max-w-2xl mx-auto mb-14 md:mb-20">
+        <span class="text-gold/90 text-xs font-sans uppercase tracking-[0.25em]">Project intelligence</span>
+        <h3 class="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl text-white font-medium tracking-tight">
+          Residence overview &amp; highlights
+        </h3>
+        <p class="mt-4 text-white/60 font-sans text-sm md:text-base leading-relaxed">
+          Key facts from the Panchshil brochure — pricing, layout, masterplan, and launch mechanics in one place.
+        </p>
+        <div class="mt-6 h-px w-16 gold-gradient mx-auto" aria-hidden="true"></div>
+      </header>
+
+      <!-- Row 1: economics & footprint — Row 2: action & product -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+        <article class="panchshil-card p-6 md:p-8 rounded-2xl border border-white/10 bg-charcoal-light/60 backdrop-blur-md shadow-xl shadow-black/25 flex flex-col">
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Pricing</h4>
+          <ul class="mt-6 space-y-5 flex-1">
+            @for (tier of pricingTiers; track tier.label) {
+              <li class="panchshil-price-row rounded-xl border border-gold/20 bg-black/20 px-4 py-4">
+                <span class="text-gold font-sans text-sm uppercase tracking-wider">{{ tier.label }}</span>
+                <p class="mt-2 font-serif text-lg md:text-xl text-white">{{ tier.detail }}</p>
+                <p class="mt-1 text-white/50 text-sm font-sans">{{ tier.note }}</p>
+              </li>
+            }
+          </ul>
+        </article>
+
+        <article
+          class="panchshil-card p-6 md:p-8 rounded-2xl border border-white/10 bg-gradient-to-br from-charcoal-light/80 to-charcoal/90 backdrop-blur-md flex flex-col"
+        >
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Layout &amp; design</h4>
+          <ul class="mt-6 space-y-4 text-white/75 font-sans text-sm md:text-base leading-relaxed flex-1">
+            @for (point of overviewPoints; track point) {
+              <li class="flex gap-3">
+                <span class="text-gold mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-gold/80" aria-hidden="true"></span>
+                <span>{{ point }}</span>
+              </li>
+            }
+          </ul>
+        </article>
+
+        <article class="panchshil-card p-6 md:p-8 rounded-2xl border border-white/10 bg-charcoal-light/55 backdrop-blur-md md:col-span-2 xl:col-span-1 flex flex-col">
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Project highlights</h4>
+          <ul class="mt-6 space-y-3 text-white/70 font-sans text-sm md:text-base leading-relaxed flex-1">
+            @for (h of highlightPoints; track h) {
+              <li class="flex gap-2">
+                <span class="text-gold shrink-0 mt-0.5">✦</span>
+                <span>{{ h }}</span>
+              </li>
+            }
+          </ul>
+        </article>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mt-6 md:mt-8">
+        <article class="panchshil-card p-6 md:p-8 rounded-2xl border border-white/10 bg-charcoal-light/50 backdrop-blur-md flex flex-col">
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Launch &amp; booking</h4>
+          <dl class="mt-6 space-y-4 flex-1">
+            @for (row of launchNotes; track row.label) {
+              <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-4 border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                <dt class="text-gold/90 text-xs font-sans uppercase tracking-[0.2em] shrink-0 sm:w-40">{{ row.label }}</dt>
+                <dd class="text-white/85 font-sans">{{ row.value }}</dd>
+              </div>
+            }
+          </dl>
+        </article>
+
+        <article class="panchshil-card p-6 md:p-8 rounded-2xl border border-gold/25 bg-black/25 backdrop-blur-sm flex flex-col">
+          <h4 class="font-serif text-xl md:text-2xl text-gold-light font-medium">Why Panchshil Mundhwa</h4>
+          <ul class="mt-6 space-y-3 text-white/70 font-sans text-sm md:text-base leading-relaxed flex-1">
+            @for (w of whyPoints; track w) {
+              <li class="pl-4 border-l-2 border-gold/40">{{ w }}</li>
+            }
+          </ul>
+        </article>
+
+        <article class="panchshil-card p-6 md:p-8 rounded-2xl border border-white/10 bg-charcoal-light/55 backdrop-blur-md md:col-span-2 xl:col-span-1 flex flex-col">
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Apartment details</h4>
+          <ul class="mt-6 space-y-4 flex-1">
+            @for (apt of apartmentSpecs; track apt.config) {
+              <li class="rounded-lg bg-white/5 border border-white/10 px-4 py-3">
+                <span class="text-gold text-xs font-sans uppercase tracking-wider">{{ apt.config }}</span>
+                <p class="mt-1 text-white/85 font-sans text-sm md:text-base">{{ apt.carpet }}</p>
+              </li>
+            }
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

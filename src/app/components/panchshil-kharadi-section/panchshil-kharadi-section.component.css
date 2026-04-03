@@ -1,0 +1,108 @@
+/* Panchshil Mundhwa — full-height video + editorial content */
+
+/* Mobile: stacked banner + copy; md+: full-viewport hero (min-height from Tailwind) */
+.panchshil-video-hero {
+  min-height: 0;
+}
+
+@media (min-width: 768px) {
+  .panchshil-video-hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
+.panchshil-video {
+  object-position: center center;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Prefer high-quality resampling when the UA supports it (images/video; harmless where ignored) */
+  image-rendering: auto;
+}
+
+@supports (image-rendering: high-quality) {
+  .panchshil-video {
+    image-rendering: high-quality;
+  }
+}
+
+.panchshil-card {
+  position: relative;
+}
+
+/* Subtle icon-only share popover (charcoal + gold) */
+.panchshil-share-popover {
+  animation: panchshil-share-in 0.2s ease-out;
+}
+
+@keyframes panchshil-share-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.panchshil-share-icon-btn {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  color: hsl(0 0% 100% / 0.55);
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.panchshil-share-icon-btn:hover {
+  color: hsl(var(--gold));
+  background: hsl(0 0% 100% / 0.06);
+  border-color: hsl(var(--gold) / 0.22);
+}
+
+.panchshil-share-icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--charcoal)), 0 0 0 4px hsl(var(--gold) / 0.45);
+}
+
+.panchshil-share-icon-btn--active {
+  color: hsl(var(--gold));
+  border-color: hsl(var(--gold) / 0.35);
+  background: hsl(var(--gold) / 0.08);
+}
+
+.panchshil-share-icon-btn--close:hover {
+  color: hsl(0 0% 100% / 0.9);
+  border-color: hsl(0 0% 100% / 0.12);
+}
+
+.panchshil-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--gold) / 0.25),
+    transparent 40%,
+    transparent 60%,
+    hsl(var(--gold) / 0.12)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
