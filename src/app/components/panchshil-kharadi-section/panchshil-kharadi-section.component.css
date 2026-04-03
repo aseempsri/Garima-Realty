@@ -1,5 +1,9 @@
 /* Panchshil Mundhwa — full-height video + editorial content */
 
+#panchshil-mundhwa {
+  scroll-margin-top: 5.5rem;
+}
+
 /* Mobile: stacked banner + copy; md+: full-viewport hero (min-height from Tailwind) */
 .panchshil-video-hero {
   min-height: 0;
