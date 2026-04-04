@@ -24,7 +24,7 @@ interface PanchshilCarouselSlide {
   styleUrls: ['./panchshil-kharadi-section.component.css'],
 })
 export class PanchshilKharadiSectionComponent implements OnDestroy {
-  readonly videoSrc = 'assets/panchshilKharadi/MicrosoftTeams-video.mp4';
+  readonly videoSrc = 'assets/panchshilKharadi/57Avenue%20by%20Panchshil.mp4';
 
   @HostListener('document:keydown.escape')
   onDocumentEscape(): void {
