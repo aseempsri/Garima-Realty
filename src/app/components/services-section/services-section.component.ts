@@ -36,6 +36,7 @@ interface Service {
 export class ServicesSectionComponent {
   services: Service[] = [
     { iconType: 'building2', title: 'Premium Residential & Commercial', desc: 'Curated luxury properties across top micro-markets.' },
+    { iconType: 'map-pin', title: 'Premium Land & Plot Plans', desc: 'Strategic land parcels in growth corridors with clear titles and long-term upside.' },
     { iconType: 'trending-up', title: 'Strategic Investment Advisory', desc: 'Data-driven insights for maximum portfolio growth.' },
     { iconType: 'bar-chart-3', title: 'High ROI Selection', desc: 'Properties with proven appreciation potential of 10-15% annually.' },
     { iconType: 'handshake', title: 'End-to-End Transaction Management', desc: 'Seamless buying experience from shortlisting to possession.' },
