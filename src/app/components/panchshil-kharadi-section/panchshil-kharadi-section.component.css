@@ -1,6 +1,7 @@
 /* Panchshil Mundhwa — full-height video + editorial content */
 
-#panchshil-mundhwa {
+#panchshil-mundhwa,
+#panchshil-mundhwa-hero {
   scroll-margin-top: 5.5rem;
 }
 

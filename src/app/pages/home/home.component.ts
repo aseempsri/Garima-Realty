@@ -23,6 +23,12 @@ import { ContactSectionComponent } from '../../components/contact-section/contac
 import { FooterComponent } from '../../components/footer/footer.component';
 import { WhatsAppButtonComponent } from '../../components/whatsapp-button/whatsapp-button.component';
 
+/** Section hash → video-hero anchor (scroll target below fixed navbar). */
+const PROJECT_HERO_ANCHORS: Record<string, string> = {
+  'the-everett-lullanagar': 'the-everett-lullanagar-hero',
+  'panchshil-mundhwa': 'panchshil-mundhwa-hero',
+};
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -64,18 +70,22 @@ export class HomeComponent {
       .subscribe(() => this.scheduleScrollToHash());
 
     afterNextRender(() => {
+      const win = this.doc.defaultView;
+      if (win && 'scrollRestoration' in win.history) {
+        win.history.scrollRestoration = 'manual';
+      }
       this.scheduleScrollToHash();
-      this.doc.defaultView?.addEventListener('hashchange', () => this.scrollToHashIfPresent());
+      win?.addEventListener('hashchange', () => this.scheduleScrollToHash());
     });
   }
 
-  /** Mobile in-app browsers often skip native hash scroll after SPA boot; retry after layout settles. */
+  /** Mobile in-app browsers need retries while videos/images settle layout. */
   private scheduleScrollToHash(): void {
     const win = this.doc.defaultView;
     if (!win) {
       return;
     }
-    const delays = [0, 50, 150, 400, 800];
+    const delays = [0, 50, 150, 400, 800, 1500, 2500, 4000];
     for (const ms of delays) {
       win.setTimeout(() => this.scrollToHashIfPresent(), ms);
     }
@@ -86,11 +96,25 @@ export class HomeComponent {
     if (!hash.startsWith('#') || hash.length < 2) {
       return;
     }
-    const id = decodeURIComponent(hash.slice(1).split('?')[0]);
-    const el = this.doc.getElementById(id);
+    const sectionId = decodeURIComponent(hash.slice(1).split('?')[0]);
+    const targetId = PROJECT_HERO_ANCHORS[sectionId] ?? sectionId;
+    const el =
+      this.doc.getElementById(targetId) ??
+      this.doc.getElementById(`${sectionId}-hero`) ??
+      this.doc.getElementById(sectionId);
     if (!el) {
       return;
     }
-    el.scrollIntoView({ behavior: 'auto', block: 'start' });
+
+    const win = this.doc.defaultView;
+    if (!win) {
+      return;
+    }
+
+    const nav = this.doc.querySelector('app-navbar nav');
+    const navHeight = nav?.getBoundingClientRect().height ?? 80;
+    const top = el.getBoundingClientRect().top + win.scrollY - navHeight;
+
+    win.scrollTo({ top: Math.max(0, top), left: 0, behavior: 'auto' });
   }
 }

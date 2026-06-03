@@ -29,7 +29,9 @@
   <script>
     (function () {
       var ua = navigator.userAgent || '';
-      if (/facebookexternalhit|Facebot|WhatsApp|Twitterbot|LinkedInBot|Slackbot|Googlebot|bingbot/i.test(ua)) {
+      var isPreviewBot = !/Mozilla\/5/i.test(ua) &&
+        /facebookexternalhit|Facebot|WhatsApp|Twitterbot|LinkedInBot|Slackbot|Googlebot|bingbot/i.test(ua);
+      if (isPreviewBot) {
         return;
       }
       location.replace('/#panchshil-mundhwa');
