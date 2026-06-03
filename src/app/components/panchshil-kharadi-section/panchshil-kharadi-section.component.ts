@@ -16,6 +16,7 @@ import {
   projectShareUrl,
   resolveAssetOrigin,
   resolveShareOrigin,
+  shareCacheBustToken,
   shareProjectViaWhatsApp,
 } from '../../core/project-share';
 import { GalleryLightboxComponent } from '../gallery-lightbox/gallery-lightbox.component';
@@ -50,6 +51,7 @@ export class PanchshilKharadiSectionComponent implements OnDestroy {
 
   readonly shareModalOpen = signal(false);
   readonly linkCopied = signal(false);
+  private shareLinkVersion = 0;
   readonly galleryExpanded = signal(false);
 
   readonly carouselSlides: PanchshilCarouselSlide[] = [
@@ -171,6 +173,7 @@ export class PanchshilKharadiSectionComponent implements OnDestroy {
   }
 
   openShareModal(): void {
+    this.shareLinkVersion = Date.now();
     this.shareModalOpen.set(true);
   }
 
@@ -179,7 +182,8 @@ export class PanchshilKharadiSectionComponent implements OnDestroy {
   }
 
   sharePageUrl(): string {
-    return projectShareUrl(this.shareProfile.slug, resolveShareOrigin());
+    const version = this.shareLinkVersion || shareCacheBustToken();
+    return projectShareUrl(this.shareProfile.slug, resolveShareOrigin(), version);
   }
 
   shareImageUrl(): string {
@@ -187,7 +191,8 @@ export class PanchshilKharadiSectionComponent implements OnDestroy {
   }
 
   shareMessagePlain(): string {
-    return formatProjectShareMessage(this.shareProfile, resolveShareOrigin());
+    const version = this.shareLinkVersion || shareCacheBustToken();
+    return formatProjectShareMessage(this.shareProfile, resolveShareOrigin(), version);
   }
 
   twitterIntentText(): string {

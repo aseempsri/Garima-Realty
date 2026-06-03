@@ -45,8 +45,18 @@ export const PROJECT_SHARE_PROFILES: Record<string, ProjectShareProfile> = {
   },
 };
 
-export function projectShareUrl(slug: string, origin = SITE_ORIGIN): string {
-  return `${origin.replace(/\/$/, '')}/p/${slug}/`;
+/** Fresh query param so WhatsApp/Facebook re-scrape link previews instead of using cache. */
+export function shareCacheBustToken(): number {
+  return Date.now();
+}
+
+export function projectShareUrl(
+  slug: string,
+  origin = SITE_ORIGIN,
+  cacheBust: number = shareCacheBustToken()
+): string {
+  const base = `${origin.replace(/\/$/, '')}/p/${slug}/`;
+  return `${base}?v=${cacheBust}`;
 }
 
 export function projectShareImageUrl(profile: ProjectShareProfile, origin = SITE_ORIGIN): string {
@@ -73,9 +83,14 @@ export function resolveAssetOrigin(): string {
   return window.location.origin;
 }
 
-export function formatProjectShareMessage(profile: ProjectShareProfile, origin?: string): string {
+export function formatProjectShareMessage(
+  profile: ProjectShareProfile,
+  origin?: string,
+  cacheBust?: number
+): string {
   const shareOrigin = origin ?? resolveShareOrigin();
-  const url = projectShareUrl(profile.slug, shareOrigin);
+  const version = cacheBust ?? shareCacheBustToken();
+  const url = projectShareUrl(profile.slug, shareOrigin, version);
 
   return [
     'Garima Realty',

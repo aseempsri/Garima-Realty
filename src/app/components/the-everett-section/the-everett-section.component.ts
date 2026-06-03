@@ -15,6 +15,7 @@ import {
   projectShareUrl,
   resolveAssetOrigin,
   resolveShareOrigin,
+  shareCacheBustToken,
   shareProjectViaWhatsApp,
 } from '../../core/project-share';
 import { GalleryLightboxComponent } from '../gallery-lightbox/gallery-lightbox.component';
@@ -63,6 +64,7 @@ export class TheEverettSectionComponent implements OnDestroy {
 
   readonly shareModalOpen = signal(false);
   readonly linkCopied = signal(false);
+  private shareLinkVersion = 0;
   readonly galleryExpanded = signal(false);
 
   readonly carouselSlides: EverettCarouselSlide[] = [
@@ -240,6 +242,7 @@ export class TheEverettSectionComponent implements OnDestroy {
   }
 
   openShareModal(): void {
+    this.shareLinkVersion = Date.now();
     this.shareModalOpen.set(true);
   }
 
@@ -248,7 +251,8 @@ export class TheEverettSectionComponent implements OnDestroy {
   }
 
   sharePageUrl(): string {
-    return projectShareUrl(this.shareProfile.slug, resolveShareOrigin());
+    const version = this.shareLinkVersion || shareCacheBustToken();
+    return projectShareUrl(this.shareProfile.slug, resolveShareOrigin(), version);
   }
 
   shareImageUrl(): string {
@@ -256,7 +260,8 @@ export class TheEverettSectionComponent implements OnDestroy {
   }
 
   shareMessagePlain(): string {
-    return formatProjectShareMessage(this.shareProfile, resolveShareOrigin());
+    const version = this.shareLinkVersion || shareCacheBustToken();
+    return formatProjectShareMessage(this.shareProfile, resolveShareOrigin(), version);
   }
 
   twitterIntentText(): string {
