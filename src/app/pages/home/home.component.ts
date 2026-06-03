@@ -10,7 +10,7 @@ import { PresenceSectionComponent } from '../../components/presence-section/pres
 import { ServicesSectionComponent } from '../../components/services-section/services-section.component';
 import { WarehouseSectionComponent } from '../../components/warehouse-section/warehouse-section.component';
 import { PanchshilKharadiSectionComponent } from '../../components/panchshil-kharadi-section/panchshil-kharadi-section.component';
-import { JhamtaniAdSectionComponent } from '../../components/jhamtani-ad-section/jhamtani-ad-section.component';
+import { TheEverettSectionComponent } from '../../components/the-everett-section/the-everett-section.component';
 import { ProjectsSectionComponent } from '../../components/projects-section/projects-section.component';
 import { FeaturedPortfolioSectionComponent } from '../../components/featured-portfolio-section/featured-portfolio-section.component';
 import { WhyPuneSectionComponent } from '../../components/why-pune-section/why-pune-section.component';
@@ -35,7 +35,7 @@ import { WhatsAppButtonComponent } from '../../components/whatsapp-button/whatsa
     ServicesSectionComponent,
     WarehouseSectionComponent,
     PanchshilKharadiSectionComponent,
-    JhamtaniAdSectionComponent,
+    TheEverettSectionComponent,
     ProjectsSectionComponent,
     FeaturedPortfolioSectionComponent,
     WhyPuneSectionComponent,

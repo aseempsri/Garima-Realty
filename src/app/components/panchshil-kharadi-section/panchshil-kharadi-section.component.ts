@@ -9,6 +9,16 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
+import {
+  formatProjectShareMessage,
+  PROJECT_SHARE_PROFILES,
+  projectShareImageUrl,
+  projectShareUrl,
+  resolveAssetOrigin,
+  resolveShareOrigin,
+  shareProjectViaWhatsApp,
+} from '../../core/project-share';
+import { GalleryLightboxComponent } from '../gallery-lightbox/gallery-lightbox.component';
 
 interface PanchshilCarouselSlide {
   src: string;
@@ -19,15 +29,20 @@ interface PanchshilCarouselSlide {
 @Component({
   selector: 'app-panchshil-kharadi-section',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, GalleryLightboxComponent],
   templateUrl: './panchshil-kharadi-section.component.html',
   styleUrls: ['./panchshil-kharadi-section.component.css'],
 })
 export class PanchshilKharadiSectionComponent implements OnDestroy {
   readonly videoSrc = 'assets/panchshilKharadi/57Avenue%20by%20Panchshil.mp4';
+  readonly shareProfile = PROJECT_SHARE_PROFILES['panchshil-mundhwa'];
 
   @HostListener('document:keydown.escape')
   onDocumentEscape(): void {
+    if (this.galleryExpanded()) {
+      this.closeGallery();
+      return;
+    }
     if (this.shareModalOpen()) {
       this.closeShareModal();
     }
@@ -35,6 +50,7 @@ export class PanchshilKharadiSectionComponent implements OnDestroy {
 
   readonly shareModalOpen = signal(false);
   readonly linkCopied = signal(false);
+  readonly galleryExpanded = signal(false);
 
   readonly carouselSlides: PanchshilCarouselSlide[] = [
     {
@@ -145,6 +161,15 @@ export class PanchshilKharadiSectionComponent implements OnDestroy {
     }
   }
 
+  openGallery(): void {
+    this.galleryExpanded.set(true);
+    this.carouselPaused.set(true);
+  }
+
+  closeGallery(): void {
+    this.galleryExpanded.set(false);
+  }
+
   openShareModal(): void {
     this.shareModalOpen.set(true);
   }
@@ -154,60 +179,27 @@ export class PanchshilKharadiSectionComponent implements OnDestroy {
   }
 
   sharePageUrl(): string {
-    if (typeof window === 'undefined') {
-      return '';
-    }
-    const { origin, pathname } = window.location;
-    return `${origin}${pathname}#panchshil-mundhwa`;
+    return projectShareUrl(this.shareProfile.slug, resolveShareOrigin());
   }
 
   shareImageUrl(): string {
-    if (typeof window === 'undefined') {
-      return '';
-    }
-    return `${window.location.origin}/assets/panchshilKharadi/57%20av.webp`;
+    return projectShareImageUrl(this.shareProfile, resolveAssetOrigin());
   }
 
-  /** Full message for WhatsApp / native share text; ends with the page link only (no separate photo URL). */
   shareMessagePlain(): string {
-    return [
-      'Panchshil Mundhwa',
-      '',
-      '• Project: Ultra-luxury, low-density development (369 units) on 6.5 acres near Koregaon Park.',
-      '• Units: 3.5 BHK (2,033 sq.ft.) from ₹4.25 Cr; exclusive 4.5 BHK (3,522 sq.ft.) at ₹8 Cr.',
-      '• Specs: 27 floors, 4 units per floor, and high-speed elevators.',
-      '• Launch: Mid-November 2025; ₹25 lakh token required.',
-      '',
-      this.sharePageUrl(),
-    ].join('\n');
+    return formatProjectShareMessage(this.shareProfile, resolveShareOrigin());
   }
 
   twitterIntentText(): string {
-    return 'Panchshil Mundhwa — ultra-luxury low-density development in Pune. Details & photo on the site.';
+    return `${this.shareProfile.headline} — ${this.shareProfile.ogDescription.split('.')[0]}.`;
   }
 
   async shareViaWhatsApp(): Promise<void> {
-    const text = this.shareMessagePlain();
-    if (typeof navigator !== 'undefined' && navigator.share) {
-      try {
-        const imageUrl = this.shareImageUrl();
-        const res = await fetch(imageUrl);
-        if (res.ok) {
-          const blob = await res.blob();
-          const file = new File([blob], 'Panchshil-Mundhwa.webp', { type: blob.type || 'image/webp' });
-          const payload: ShareData = { text, title: 'Panchshil Mundhwa', files: [file] };
-          if (navigator.canShare?.(payload)) {
-            await navigator.share(payload);
-            this.closeShareModal();
-            return;
-          }
-        }
-      } catch {
-        /* fall through to wa.me */
-      }
-    }
-    const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
+    await shareProjectViaWhatsApp(this.shareMessagePlain(), {
+      imageUrl: this.shareImageUrl(),
+      imageFilename: 'Panchshil-Mundhwa.webp',
+    });
+    this.closeShareModal();
   }
 
   shareViaFacebook(): void {
@@ -226,12 +218,12 @@ export class PanchshilKharadiSectionComponent implements OnDestroy {
   }
 
   async copyShareLink(): Promise<void> {
-    const link = this.sharePageUrl();
-    if (!link || typeof navigator === 'undefined' || !navigator.clipboard?.writeText) {
+    const message = this.shareMessagePlain();
+    if (!message || typeof navigator === 'undefined' || !navigator.clipboard?.writeText) {
       return;
     }
     try {
-      await navigator.clipboard.writeText(link);
+      await navigator.clipboard.writeText(message);
       this.linkCopied.set(true);
       if (this.copyResetTimer) {
         clearTimeout(this.copyResetTimer);

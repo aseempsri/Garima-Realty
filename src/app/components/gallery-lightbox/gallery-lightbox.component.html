@@ -1,0 +1,59 @@
+@if (open()) {
+  <div
+    class="gallery-lightbox"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="currentSlide().headline + ' — full screen gallery'"
+    (click)="onBackdropClick($event)"
+  >
+    <div class="gallery-lightbox__panel">
+      <div class="gallery-lightbox__toolbar">
+        <span class="gallery-lightbox__counter tabular-nums">
+          {{ index() + 1 }}/{{ slides().length }}
+        </span>
+        <button
+          type="button"
+          class="gallery-lightbox__icon-btn"
+          (click)="closed.emit()"
+          aria-label="Close full screen"
+        >
+          <lucide-icon name="x" class="w-5 h-5" stroke-width="2"></lucide-icon>
+        </button>
+      </div>
+
+      <div class="gallery-lightbox__stage">
+        <button
+          type="button"
+          class="gallery-lightbox__nav gallery-lightbox__nav--prev"
+          (click)="previous.emit()"
+          aria-label="Previous image"
+        >
+          <lucide-icon name="chevron-left" class="w-7 h-7" stroke-width="2"></lucide-icon>
+        </button>
+
+        <img
+          [src]="currentSlide().src"
+          [alt]="currentSlide().headline + altSuffix()"
+          class="gallery-lightbox__image"
+        />
+
+        <button
+          type="button"
+          class="gallery-lightbox__nav gallery-lightbox__nav--next"
+          (click)="next.emit()"
+          aria-label="Next image"
+        >
+          <lucide-icon name="chevron-right" class="w-7 h-7" stroke-width="2"></lucide-icon>
+        </button>
+      </div>
+
+      <div class="gallery-lightbox__caption">
+        @if (contextLabel()) {
+          <p class="gallery-lightbox__context">{{ contextLabel() }}</p>
+        }
+        <p class="gallery-lightbox__headline">{{ currentSlide().headline }}</p>
+        <p class="gallery-lightbox__text">{{ currentSlide().caption }}</p>
+      </div>
+    </div>
+  </div>
+}

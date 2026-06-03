@@ -37,6 +37,7 @@ import {
   Copy,
   Facebook,
   Twitter,
+  Maximize2,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -78,6 +79,7 @@ export const appConfig: ApplicationConfig = {
         Copy,
         Facebook,
         Twitter,
+        Maximize2,
       })
     ),
   ],

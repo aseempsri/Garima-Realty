@@ -114,8 +114,8 @@
           (click)="copyShareLink()"
           class="panchshil-share-icon-btn"
           [class.panchshil-share-icon-btn--active]="linkCopied()"
-          [attr.title]="linkCopied() ? 'Copied' : 'Copy link'"
-          [attr.aria-label]="linkCopied() ? 'Link copied' : 'Copy page link'"
+          [attr.title]="linkCopied() ? 'Copied' : 'Copy share message'"
+          [attr.aria-label]="linkCopied() ? 'Message copied' : 'Copy formatted share message'"
         >
           <lucide-icon [name]="linkCopied() ? 'check' : 'copy'" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
         </button>
@@ -291,12 +291,24 @@
           </div>
 
           <!-- Right 50%: image carousel (full bleed inside column) -->
-          <div class="order-1 lg:order-2 min-h-0 min-w-0">
+          <div class="order-1 lg:order-2 min-h-0 min-w-0 flex flex-col justify-center lg:min-h-full">
             <div
               class="relative rounded-2xl overflow-hidden ring-1 ring-gold/25 shadow-2xl shadow-black/50 bg-charcoal panchshil-gallery-stage w-full"
               (touchstart)="onCarouselTouchStart($event)"
               (touchend)="onCarouselTouchEnd($event)"
             >
+              <div
+                class="absolute top-3 left-3 md:top-4 md:left-4 z-20 flex items-center gap-2"
+              >
+                <button
+                  type="button"
+                  (click)="openGallery(); $event.stopPropagation()"
+                  class="panchshil-gallery-expand"
+                  aria-label="Expand image to full screen"
+                >
+                  <lucide-icon name="maximize-2" class="w-4 h-4" stroke-width="2"></lucide-icon>
+                </button>
+              </div>
               <div
                 class="absolute top-3 right-3 md:top-4 md:right-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-white/10 text-xs font-sans text-white/90 tabular-nums"
               >
@@ -321,12 +333,19 @@
               </button>
 
               <div class="relative z-0 w-full panchshil-gallery-image-box">
-                <img
-                  [src]="currentCarouselSlide().src"
-                  [alt]="currentCarouselSlide().headline + ' — 57 Avenue Mundhwa'"
-                  class="panchshil-gallery-hero-img"
-                  loading="lazy"
-                />
+                <button
+                  type="button"
+                  class="panchshil-gallery-image-trigger"
+                  (click)="openGallery()"
+                  aria-label="Expand image to full screen"
+                >
+                  <img
+                    [src]="currentCarouselSlide().src"
+                    [alt]="currentCarouselSlide().headline + ' — 57 Avenue Mundhwa'"
+                    class="panchshil-gallery-hero-img"
+                    loading="lazy"
+                  />
+                </button>
               </div>
 
               <div
@@ -346,4 +365,15 @@
       </div>
     </div>
   </div>
+
+  <app-gallery-lightbox
+    [open]="galleryExpanded()"
+    [slides]="carouselSlides"
+    [index]="carouselIndex()"
+    contextLabel="Residential · Mundhwa"
+    altSuffix=" — 57 Avenue Mundhwa"
+    (closed)="closeGallery()"
+    (previous)="advanceCarousel(-1)"
+    (next)="advanceCarousel(1)"
+  />
 </section>
