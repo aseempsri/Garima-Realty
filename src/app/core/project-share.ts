@@ -25,7 +25,7 @@ export const PROJECT_SHARE_PROFILES: Record<string, ProjectShareProfile> = {
     headline: 'The Everett · Lullanagar',
     subtitle: 'Trophy ultra-premium · Launching',
     location: 'Lullanagar, Pune',
-    configuration: '3, 4 & 5 BHK · Tribeca',
+    configuration: '3, 4 & 5 bed · Tribeca',
     priceLine: 'From ₹4 Cr All Inclusive',
     developer: 'Tribeca',
   },

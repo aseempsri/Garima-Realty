@@ -317,27 +317,27 @@ export class TheEverettSectionComponent implements OnDestroy {
 
   readonly pricingTiers = [
     {
-      label: '3 Bed',
+      label: '3 bed',
       detail: '₹4 Cr All Inclusive',
       note: '~1,800 sq.ft.',
     },
     {
-      label: '4 Bed',
+      label: '4 bed',
       detail: '₹4.75 Cr – ₹5.25 Cr All Inclusive',
       note: '~2,250 sq.ft.',
     },
     {
-      label: '4 Bed (Large)',
+      label: '4 bed (Large)',
       detail: '₹5.35 Cr – ₹5.65 Cr All Inclusive',
       note: '~2,450 sq.ft.',
     },
     {
-      label: '5 Bed Duplex',
+      label: '5 bed Duplex',
       detail: '₹6.3 Cr – ₹6.5 Cr All Inclusive',
       note: '~2,800 sq.ft.',
     },
     {
-      label: '5 Bed (Exclusive)',
+      label: '5 bed (Exclusive)',
       detail: '₹7.90 Cr – ₹8.2 Cr All Inclusive',
       note: '~3,300 sq.ft.',
     },
@@ -347,15 +347,15 @@ export class TheEverettSectionComponent implements OnDestroy {
     '3.63-acre premium development · two elegant 29-storey towers',
     'Six dedicated levels of parking',
     '~70,000 sq.ft. curated lifestyle amenities — wellness, leisure & social',
-    '5, 4 & 3-bedroom residences with multiple master bedrooms & walk-in wardrobes',
+    '5, 4 & 3 bed residences with multiple master bedrooms & walk-in wardrobes',
   ];
 
   readonly apartmentSpecs = [
-    { config: '3 Bed', carpet: '~1,800 sq.ft.' },
-    { config: '4 Bed', carpet: '~2,250 sq.ft.' },
-    { config: '4 Bed (Large)', carpet: '~2,450 sq.ft.' },
-    { config: '5 Bed Duplex', carpet: '~2,800 sq.ft.' },
-    { config: '5 Bed (Exclusive)', carpet: '~3,300 sq.ft.' },
+    { config: '3 bed', carpet: '~1,800 sq.ft.' },
+    { config: '4 bed', carpet: '~2,250 sq.ft.' },
+    { config: '4 bed (Large)', carpet: '~2,450 sq.ft.' },
+    { config: '5 bed Duplex', carpet: '~2,800 sq.ft.' },
+    { config: '5 bed (Exclusive)', carpet: '~3,300 sq.ft.' },
   ];
 
   readonly whyPoints = [
