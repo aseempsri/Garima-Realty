@@ -93,13 +93,13 @@ export class TheEverettSectionComponent implements OnDestroy {
         'Multiple large decks framing sunset views — private outdoor rooms for discerning homeowners.',
     },
     {
-      src: 'assets/theEverett/rooftop-pool.jpeg',
+      src: 'assets/theEverett/terrace.jpeg',
       headline: 'Rooftop waterbody',
       caption:
         'Waterbody seating on the rooftop — a serene social space above the city skyline.',
     },
     {
-      src: 'assets/theEverett/terrace.jpeg',
+      src: 'assets/theEverett/rooftop-pool.jpeg',
       headline: 'Podium pool',
       caption:
         'Swimming pool on the podium level — curated wellness and leisure at the heart of the development.',
