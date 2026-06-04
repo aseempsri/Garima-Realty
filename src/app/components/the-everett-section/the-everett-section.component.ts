@@ -41,7 +41,7 @@ interface HeroVideoClip {
 export class TheEverettSectionComponent implements OnDestroy {
   readonly shareProfile = PROJECT_SHARE_PROFILES['the-everett-lullanagar'];
 
-  /** Flythrough playlist: Deck → Night facade → Rooftop → Pool, then repeat. */
+  /** Flythrough playlist: Deck → Night facade → Rooftop → Podium pool, then repeat. */
   readonly heroVideos: HeroVideoClip[] = [
     { src: 'assets/theEverett/deck.mp4', startAt: 4 },
     { src: 'assets/theEverett/night-facade.mp4', startAt: 4.5 },
@@ -94,15 +94,15 @@ export class TheEverettSectionComponent implements OnDestroy {
     },
     {
       src: 'assets/theEverett/rooftop-pool.jpeg',
-      headline: 'Trophy poolscape',
+      headline: 'Rooftop waterbody',
       caption:
-        'Rooftop infinity pool and curated wellness — leisure elevated above the city skyline.',
+        'Waterbody seating on the rooftop — a serene social space above the city skyline.',
     },
     {
       src: 'assets/theEverett/terrace.jpeg',
-      headline: 'Elevated leisure',
+      headline: 'Podium pool',
       caption:
-        'Rooftop terraces and social spaces across ~70,000 sq.ft. of curated lifestyle amenities.',
+        'Swimming pool on the podium level — curated wellness and leisure at the heart of the development.',
     },
     {
       src: 'assets/theEverett/temple.jpg',
@@ -318,27 +318,27 @@ export class TheEverettSectionComponent implements OnDestroy {
   readonly pricingTiers = [
     {
       label: '3 Bed',
-      detail: '₹4 Cr TCO',
+      detail: '₹4 Cr All Inclusive',
       note: '~1,800 sq.ft.',
     },
     {
       label: '4 Bed',
-      detail: '₹4.75 Cr – ₹5.25 Cr TCO',
+      detail: '₹4.75 Cr – ₹5.25 Cr All Inclusive',
       note: '~2,250 sq.ft.',
     },
     {
       label: '4 Bed (Large)',
-      detail: '₹5.35 Cr – ₹5.65 Cr TCO',
+      detail: '₹5.35 Cr – ₹5.65 Cr All Inclusive',
       note: '~2,450 sq.ft.',
     },
     {
       label: '5 Bed Duplex',
-      detail: '₹6.3 Cr – ₹6.5 Cr TCO',
+      detail: '₹6.3 Cr – ₹6.5 Cr All Inclusive',
       note: '~2,800 sq.ft.',
     },
     {
       label: '5 Bed (Exclusive)',
-      detail: '₹7.90 Cr – ₹8.2 Cr TCO',
+      detail: '₹7.90 Cr – ₹8.2 Cr All Inclusive',
       note: '~3,300 sq.ft.',
     },
   ];
@@ -365,10 +365,13 @@ export class TheEverettSectionComponent implements OnDestroy {
   ];
 
   readonly launchNotes = [
-    { label: 'Status', value: 'Launching — EOI open for priority inventory' },
+    { label: 'Status', value: 'Launching — selective inventory access & launch benefits' },
     { label: 'Experience Centre', value: 'Private preview at Lullanagar' },
     { label: 'RERA', value: 'PM1261012600059' },
   ];
+
+  readonly launchFootnote =
+    'Launch benefits on selective inventory — connect with Garima Realty for current allocations and pricing.';
 
   readonly tribecaQuote = 'Quality is not expensive. It is priceless.';
 }

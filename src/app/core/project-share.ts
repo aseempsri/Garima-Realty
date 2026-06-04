@@ -20,13 +20,13 @@ export const PROJECT_SHARE_PROFILES: Record<string, ProjectShareProfile> = {
     hashId: 'the-everett-lullanagar',
     ogTitle: 'The Everett Lullanagar | Garima Realty',
     ogDescription:
-      'The Everett by Tribeca — trophy 3, 4 & 5 bed residences in Lullanagar, Pune. Private elevator, double-height living, ~70,000 sq.ft. amenities. From ₹4 Cr TCO.',
+      'The Everett by Tribeca — trophy 3, 4 & 5 bed residences in Lullanagar, Pune. Private elevator, double-height living, ~70,000 sq.ft. amenities. From ₹4 Cr All Inclusive.',
     ogImagePath: '/assets/theEverett/balcony-deck-og.jpg',
     headline: 'The Everett · Lullanagar',
     subtitle: 'Trophy ultra-premium · Launching',
     location: 'Lullanagar, Pune',
     configuration: '3, 4 & 5 BHK · Tribeca',
-    priceLine: 'From ₹4 Cr TCO',
+    priceLine: 'From ₹4 Cr All Inclusive',
     developer: 'Tribeca',
   },
   'panchshil-mundhwa': {
