@@ -3,21 +3,21 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { getAllRentalListings, RentalListing } from '../../core/rental-listings';
-import { isRentalIndexUnlocked, unlockRentalIndex } from '../../core/rental-access';
+import { getAllSaleListings, SaleListing } from '../../core/sale-listings';
+import { isSaleIndexUnlocked, unlockSaleIndex } from '../../core/sale-access';
 
 @Component({
-  selector: 'app-rental-index-page',
+  selector: 'app-sale-index-page',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './rental-index-page.component.html',
-  styleUrls: ['./rental-index-page.component.css'],
+  templateUrl: './sale-index-page.component.html',
+  styleUrls: ['./sale-index-page.component.css'],
 })
-export class RentalIndexPageComponent implements OnInit {
+export class SaleIndexPageComponent implements OnInit {
   readonly unlocked = signal(false);
   readonly passwordError = signal(false);
   passwordInput = '';
-  listings: RentalListing[] = [];
+  listings: SaleListing[] = [];
 
   constructor(
     private readonly title: Title,
@@ -25,15 +25,15 @@ export class RentalIndexPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.listings = getAllRentalListings();
-    this.unlocked.set(isRentalIndexUnlocked());
+    this.listings = getAllSaleListings();
+    this.unlocked.set(isSaleIndexUnlocked());
 
-    this.title.setTitle('Rental Listings | Garima Realty');
+    this.title.setTitle('Sale Listings | Garima Realty');
     this.meta.updateTag({ name: 'robots', content: 'noindex, nofollow' });
   }
 
   submitPassword(): void {
-    const ok = unlockRentalIndex(this.passwordInput);
+    const ok = unlockSaleIndex(this.passwordInput);
     if (ok) {
       this.unlocked.set(true);
       this.passwordError.set(false);
@@ -43,7 +43,7 @@ export class RentalIndexPageComponent implements OnInit {
     this.passwordError.set(true);
   }
 
-  coverSrc(listing: RentalListing): string {
+  coverSrc(listing: SaleListing): string {
     return listing.coverImagePath.replace(/^\//, '');
   }
 }

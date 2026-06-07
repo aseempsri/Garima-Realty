@@ -1,8 +1,8 @@
-.rental-header {
+.sale-header {
   isolation: isolate;
 }
 
-.rental-share-btn {
+.sale-share-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -19,17 +19,17 @@
     background-color 0.2s ease;
 }
 
-.rental-share-btn:hover {
+.sale-share-btn:hover {
   color: hsl(var(--gold));
   border-color: hsl(var(--gold) / 0.45);
   background: hsl(var(--gold) / 0.08);
 }
 
-.rental-share-popover {
-  animation: rental-share-in 0.2s ease-out;
+.sale-share-popover {
+  animation: sale-share-in 0.2s ease-out;
 }
 
-@keyframes rental-share-in {
+@keyframes sale-share-in {
   from {
     opacity: 0;
     transform: translateY(6px) scale(0.98);
@@ -40,7 +40,7 @@
   }
 }
 
-.rental-share-icon-btn {
+.sale-share-icon-btn {
   display: flex;
   height: 2.75rem;
   width: 2.75rem;
@@ -56,19 +56,19 @@
     border-color 0.2s ease;
 }
 
-.rental-share-icon-btn:hover {
+.sale-share-icon-btn:hover {
   color: hsl(var(--gold));
   background: hsl(0 0% 100% / 0.06);
   border-color: hsl(var(--gold) / 0.22);
 }
 
-.rental-share-icon-btn--active {
+.sale-share-icon-btn--active {
   color: hsl(var(--gold));
   border-color: hsl(var(--gold) / 0.35);
   background: hsl(var(--gold) / 0.08);
 }
 
-.rental-carousel-img {
+.sale-carousel-img {
   display: block;
   width: 100%;
   max-height: min(72dvh, 720px);
@@ -77,7 +77,7 @@
   background: hsl(var(--charcoal));
 }
 
-.rental-gallery-expand {
+.sale-gallery-expand {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,13 +90,13 @@
 }
 
 @media (min-width: 768px) {
-  .rental-gallery-expand {
+  .sale-gallery-expand {
     width: 2.25rem;
     height: 2.25rem;
   }
 }
 
-.rental-gallery-arrow {
+.sale-gallery-arrow {
   position: absolute;
   top: 50%;
   z-index: 20;
@@ -114,25 +114,25 @@
 }
 
 @media (min-width: 768px) {
-  .rental-gallery-arrow {
+  .sale-gallery-arrow {
     width: 2.75rem;
     height: 2.75rem;
   }
 }
 
-.rental-gallery-arrow--prev {
+.sale-gallery-arrow--prev {
   left: 0.65rem;
 }
 
-.rental-gallery-arrow--next {
+.sale-gallery-arrow--next {
   right: 0.65rem;
 }
 
-.rental-card {
+.sale-card {
   backdrop-filter: blur(8px);
 }
 
-.rental-contact-card {
+.sale-contact-card {
   position: relative;
   display: block;
   min-width: 0;
@@ -148,12 +148,12 @@
 }
 
 @media (min-width: 640px) {
-  .rental-contact-card {
+  .sale-contact-card {
     padding: 1.5rem;
   }
 }
 
-.rental-contact-card-accent {
+.sale-contact-card-accent {
   position: absolute;
   top: 0;
   right: 0;
@@ -164,7 +164,7 @@
   pointer-events: none;
 }
 
-.rental-contact-card-header {
+.sale-contact-card-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -173,7 +173,7 @@
 }
 
 @media (min-width: 640px) {
-  .rental-contact-card-header {
+  .sale-contact-card-header {
     flex-direction: row;
     align-items: center;
     gap: 1.25rem;
@@ -181,7 +181,7 @@
   }
 }
 
-.rental-contact-card-photo {
+.sale-contact-card-photo {
   width: 4.75rem;
   height: 4.75rem;
   border-radius: 9999px;
@@ -193,28 +193,28 @@
 }
 
 @media (min-width: 640px) {
-  .rental-contact-card-photo {
+  .sale-contact-card-photo {
     width: 5.5rem;
     height: 5.5rem;
   }
 }
 
-.rental-contact-card-meta {
+.sale-contact-card-meta {
   min-width: 0;
   width: 100%;
 }
 
-.rental-contact-card-rule {
+.sale-contact-card-rule {
   margin-inline: auto;
 }
 
 @media (min-width: 640px) {
-  .rental-contact-card-rule {
+  .sale-contact-card-rule {
     margin-inline: 0;
   }
 }
 
-.rental-contact-card-footer {
+.sale-contact-card-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -225,7 +225,7 @@
 }
 
 @media (min-width: 640px) {
-  .rental-contact-card-footer {
+  .sale-contact-card-footer {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -235,7 +235,7 @@
   }
 }
 
-.rental-contact-card-cta {
+.sale-contact-card-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -252,20 +252,20 @@
   transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.rental-contact-card:hover .rental-contact-card-cta {
+.sale-contact-card:hover .sale-contact-card-cta {
   color: hsl(var(--gold));
   background: hsl(var(--gold) / 0.14);
   border-color: hsl(var(--gold) / 0.4);
 }
 
-.rental-contact-card:hover {
+.sale-contact-card:hover {
   border-color: hsl(var(--gold) / 0.25);
   box-shadow: 0 24px 48px hsl(0 0% 0% / 0.35);
   transform: translateY(-2px);
 }
 
 @media (hover: none) {
-  .rental-contact-card:hover {
+  .sale-contact-card:hover {
     transform: none;
   }
 }

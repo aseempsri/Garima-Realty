@@ -3,36 +3,36 @@ import { CommonModule } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
-import { getRentalListing, RentalListing } from '../../core/rental-listings';
+import { getSaleListing, SaleListing } from '../../core/sale-listings';
 import {
-  formatRentalListingShareMessage,
-  rentalListingImageUrl,
-  rentalListingUrl,
-  shareRentalListingViaWhatsApp,
-} from '../../core/rental-listing-share';
+  formatSaleListingShareMessage,
+  saleListingImageUrl,
+  saleListingUrl,
+  shareSaleListingViaWhatsApp,
+} from '../../core/sale-listing-share';
 import { SITE_ORIGIN, shareCacheBustToken } from '../../core/project-share';
 import { GalleryLightboxComponent } from '../../components/gallery-lightbox/gallery-lightbox.component';
 
-interface RentalGallerySlide {
+interface SaleGallerySlide {
   src: string;
   headline: string;
   caption: string;
 }
 
 @Component({
-  selector: 'app-rental-listing-page',
+  selector: 'app-sale-listing-page',
   standalone: true,
   imports: [CommonModule, RouterLink, LucideAngularModule, GalleryLightboxComponent],
-  templateUrl: './rental-listing-page.component.html',
-  styleUrls: ['./rental-listing-page.component.css'],
+  templateUrl: './sale-listing-page.component.html',
+  styleUrls: ['./sale-listing-page.component.css'],
 })
-export class RentalListingPageComponent implements OnInit {
+export class SaleListingPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
 
-  listing: RentalListing | null = null;
+  listing: SaleListing | null = null;
   readonly carouselIndex = signal(0);
   readonly galleryExpanded = signal(false);
   readonly shareModalOpen = signal(false);
@@ -41,7 +41,7 @@ export class RentalListingPageComponent implements OnInit {
   private copyResetTimer?: ReturnType<typeof setTimeout>;
   private touchStartX = 0;
 
-  gallerySlides: RentalGallerySlide[] = [];
+  gallerySlides: SaleGallerySlide[] = [];
 
   @HostListener('document:keydown.escape')
   onDocumentEscape(): void {
@@ -61,7 +61,7 @@ export class RentalListingPageComponent implements OnInit {
       return;
     }
 
-    const listing = getRentalListing(slug);
+    const listing = getSaleListing(slug);
     if (!listing) {
       void this.router.navigateByUrl('/');
       return;
@@ -77,9 +77,9 @@ export class RentalListingPageComponent implements OnInit {
     this.applyMetaTags(listing);
   }
 
-  private applyMetaTags(listing: RentalListing): void {
-    const imageUrl = rentalListingImageUrl(listing, SITE_ORIGIN);
-    const pageUrl = `${SITE_ORIGIN}/r/${listing.slug}/`;
+  private applyMetaTags(listing: SaleListing): void {
+    const imageUrl = saleListingImageUrl(listing, SITE_ORIGIN);
+    const pageUrl = `${SITE_ORIGIN}/s/${listing.slug}/`;
 
     this.title.setTitle(listing.ogTitle);
     this.meta.updateTag({ name: 'description', content: listing.ogDescription });
@@ -96,7 +96,7 @@ export class RentalListingPageComponent implements OnInit {
     this.meta.updateTag({ name: 'twitter:image', content: imageUrl });
   }
 
-  currentSlide(): RentalGallerySlide {
+  currentSlide(): SaleGallerySlide {
     return this.gallerySlides[this.carouselIndex()] ?? this.gallerySlides[0];
   }
 
@@ -143,7 +143,7 @@ export class RentalListingPageComponent implements OnInit {
       return '';
     }
     const version = this.shareLinkVersion || shareCacheBustToken();
-    return formatRentalListingShareMessage(this.listing, SITE_ORIGIN, version);
+    return formatSaleListingShareMessage(this.listing, SITE_ORIGIN, version);
   }
 
   sharePageUrl(): string {
@@ -151,7 +151,7 @@ export class RentalListingPageComponent implements OnInit {
       return '';
     }
     const version = this.shareLinkVersion || shareCacheBustToken();
-    return rentalListingUrl(this.listing.slug, SITE_ORIGIN, version);
+    return saleListingUrl(this.listing.slug, SITE_ORIGIN, version);
   }
 
   twitterIntentText(): string {
@@ -162,7 +162,7 @@ export class RentalListingPageComponent implements OnInit {
   }
 
   async shareViaWhatsApp(): Promise<void> {
-    await shareRentalListingViaWhatsApp(this.shareMessagePlain());
+    await shareSaleListingViaWhatsApp(this.shareMessagePlain());
     this.closeShareModal();
   }
 
@@ -197,7 +197,7 @@ export class RentalListingPageComponent implements OnInit {
   whatsAppContactLink(phone: string): string {
     const digits = phone.replace(/\D/g, '');
     const text = encodeURIComponent(
-      `Hi, I am interested in the ${this.listing?.headline ?? 'rental'} listing on Garima Realty.`
+      `Hi, I am interested in the ${this.listing?.headline ?? 'sale'} listing on Garima Realty.`
     );
     return `https://wa.me/91${digits}?text=${text}`;
   }

@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { RentalListingPageComponent } from './pages/rental-listing/rental-listing-page.component';
-import { RentalIndexPageComponent } from './pages/rental-index/rental-index-page.component';
+import { SaleListingPageComponent } from './pages/sale-listing/sale-listing-page.component';
+import { SaleIndexPageComponent } from './pages/sale-index/sale-index-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'rent', component: RentalIndexPageComponent },
-  { path: 'rent/:slug', component: RentalListingPageComponent },
+  { path: 'sale', component: SaleIndexPageComponent },
+  { path: 'sale/:slug', component: SaleListingPageComponent },
   { path: '**', component: NotFoundComponent }
 ];

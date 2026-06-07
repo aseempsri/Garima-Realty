@@ -1,11 +1,11 @@
-export interface RentalListingContact {
+export interface SaleListingContact {
   name: string;
   role: string;
   phone: string;
   image: string;
 }
 
-export interface RentalListing {
+export interface SaleListing {
   slug: string;
   listingNumber: number;
   ogTitle: string;
@@ -19,21 +19,21 @@ export interface RentalListing {
   carpetArea: string;
   facing: string;
   parking: string;
-  rentLine: string;
+  saleLine: string;
   highlights: string[];
   images: string[];
-  contacts: RentalListingContact[];
+  contacts: SaleListingContact[];
   email: string;
 }
 
-export const RENTAL_LISTINGS: Record<string, RentalListing> = {
+export const SALE_LISTINGS: Record<string, SaleListing> = {
   'konark-vista-1': {
     slug: 'konark-vista-1',
     listingNumber: 1,
-    ogTitle: 'Konark Vista — 3.5 bed for Rent | Garima Realty',
+    ogTitle: 'Konark Vista — 3.5 bed for Sale | Garima Realty',
     ogDescription:
-      'Konark Vista — premium 3.5 bed residence for rent. 1,850 sq.ft., east-west facing, 2 car parking. Enquire with Garima Realty.',
-    coverImagePath: '/assets/rentals/konark-vista-1/cover.jpg',
+      'Konark Vista — premium 3.5 bed residence for sale. 1,850 sq.ft., east-west facing, 2 car parking. Enquire with Garima Realty.',
+    coverImagePath: '/assets/sales/konark-vista-1/cover.jpg',
     headline: 'Konark Vista',
     subtitle: '3.5 bed premium residence',
     tagline: 'Experience luxury. Experience Vista.',
@@ -42,7 +42,7 @@ export const RENTAL_LISTINGS: Record<string, RentalListing> = {
     carpetArea: '1,850 sq.ft.',
     facing: 'East–West facing',
     parking: '2 car parking',
-    rentLine: 'Available for rent — enquire for terms',
+    saleLine: 'Available for sale — enquire for price',
     highlights: [
       'Spacious living with premium marble flooring and modern finishes',
       'Large balcony with expansive city views',
@@ -50,14 +50,14 @@ export const RENTAL_LISTINGS: Record<string, RentalListing> = {
       'Premium residence in a landmark development',
     ],
     images: [
-      '/assets/rentals/konark-vista-1/cover.jpg',
-      '/assets/rentals/konark-vista-1/01-living.jpg',
-      '/assets/rentals/konark-vista-1/02.jpg',
-      '/assets/rentals/konark-vista-1/03.jpg',
-      '/assets/rentals/konark-vista-1/04.jpg',
-      '/assets/rentals/konark-vista-1/05.jpg',
-      '/assets/rentals/konark-vista-1/06.jpg',
-      '/assets/rentals/konark-vista-1/07-balcony-view.jpg',
+      '/assets/sales/konark-vista-1/cover.jpg',
+      '/assets/sales/konark-vista-1/01-living.jpg',
+      '/assets/sales/konark-vista-1/02.jpg',
+      '/assets/sales/konark-vista-1/03.jpg',
+      '/assets/sales/konark-vista-1/04.jpg',
+      '/assets/sales/konark-vista-1/05.jpg',
+      '/assets/sales/konark-vista-1/06.jpg',
+      '/assets/sales/konark-vista-1/07-balcony-view.jpg',
     ],
     contacts: [
       {
@@ -77,10 +77,10 @@ export const RENTAL_LISTINGS: Record<string, RentalListing> = {
   },
 };
 
-export function getRentalListing(slug: string): RentalListing | undefined {
-  return RENTAL_LISTINGS[slug];
+export function getSaleListing(slug: string): SaleListing | undefined {
+  return SALE_LISTINGS[slug];
 }
 
-export function getAllRentalListings(): RentalListing[] {
-  return Object.values(RENTAL_LISTINGS).sort((a, b) => a.listingNumber - b.listingNumber);
+export function getAllSaleListings(): SaleListing[] {
+  return Object.values(SALE_LISTINGS).sort((a, b) => a.listingNumber - b.listingNumber);
 }
