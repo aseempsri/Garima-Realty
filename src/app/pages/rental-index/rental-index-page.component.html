@@ -1,0 +1,74 @@
+<div class="rental-index min-h-screen bg-charcoal text-white">
+  <header class="rental-index-header sticky top-0 z-40 border-b border-white/10 bg-charcoal/95 backdrop-blur-md">
+    <div class="container mx-auto flex items-center justify-between gap-4 px-6 py-4">
+      <a routerLink="/" class="flex items-center gap-3 shrink-0">
+        <img src="assets/gr%20logo.png" alt="Garima Realty" class="h-9 w-auto object-contain" />
+      </a>
+      @if (unlocked()) {
+        <span class="text-[10px] uppercase tracking-[0.22em] text-gold/80">Rental listings</span>
+      }
+    </div>
+  </header>
+
+  @if (!unlocked()) {
+    <main class="container mx-auto px-6 py-16 md:py-24 max-w-md">
+      <div class="rental-index-gate rounded-2xl border border-white/10 bg-charcoal-light/55 p-8 md:p-10 shadow-2xl shadow-black/40">
+        <p class="text-[10px] font-sans uppercase tracking-[0.28em] text-gold/85">Private access</p>
+        <h1 class="mt-3 font-serif text-2xl md:text-3xl text-white">Rental listings</h1>
+        <p class="mt-3 text-sm text-white/55 leading-relaxed">Enter the password to view available rental properties.</p>
+
+        <form class="mt-8 space-y-4" (ngSubmit)="submitPassword()">
+          <label class="block">
+            <span class="sr-only">Password</span>
+            <input
+              type="password"
+              name="password"
+              [(ngModel)]="passwordInput"
+              autocomplete="current-password"
+              placeholder="Password"
+              class="rental-index-input w-full"
+              [class.rental-index-input--error]="passwordError()"
+            />
+          </label>
+          @if (passwordError()) {
+            <p class="text-sm text-red-400/90">Incorrect password. Please try again.</p>
+          }
+          <button type="submit" class="rental-index-submit w-full">Continue</button>
+        </form>
+      </div>
+    </main>
+  } @else {
+    <main class="container mx-auto px-6 py-8 md:py-12 max-w-6xl">
+      <h1 class="font-serif text-3xl md:text-4xl text-white font-medium tracking-tight">Rental listings</h1>
+      <p class="mt-2 text-white/60 text-sm md:text-base">Select a property to view full details and share.</p>
+
+      <div class="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (listing of listings; track listing.slug) {
+          <a [routerLink]="['/rent', listing.slug]" class="rental-index-card group">
+            <div class="rental-index-card-media">
+              <img
+                [src]="coverSrc(listing)"
+                [alt]="listing.headline + ' — rental listing'"
+                class="rental-index-card-img"
+                loading="lazy"
+              />
+              <span class="rental-index-card-badge">For rent</span>
+            </div>
+            <div class="rental-index-card-body">
+              <h2 class="font-serif text-xl text-gold group-hover:text-gold-light transition-colors">{{ listing.headline }}</h2>
+              <p class="mt-1 text-sm text-white/65">{{ listing.subtitle }}</p>
+              <ul class="mt-4 space-y-1.5 text-xs text-white/50">
+                <li>{{ listing.configuration }} · {{ listing.carpetArea }}</li>
+                <li>{{ listing.location }}</li>
+              </ul>
+            </div>
+          </a>
+        }
+      </div>
+
+      @if (listings.length === 0) {
+        <p class="mt-10 text-center text-white/50">No listings available yet.</p>
+      }
+    </main>
+  }
+</div>

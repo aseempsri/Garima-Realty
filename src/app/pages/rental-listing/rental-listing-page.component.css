@@ -1,0 +1,271 @@
+.rental-header {
+  isolation: isolate;
+}
+
+.rental-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--gold) / 0.25);
+  background: hsl(0 0% 100% / 0.05);
+  color: hsl(0 0% 100% / 0.85);
+  font-size: 0.75rem;
+  font-family: var(--font-sans, Inter, sans-serif);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.rental-share-btn:hover {
+  color: hsl(var(--gold));
+  border-color: hsl(var(--gold) / 0.45);
+  background: hsl(var(--gold) / 0.08);
+}
+
+.rental-share-popover {
+  animation: rental-share-in 0.2s ease-out;
+}
+
+@keyframes rental-share-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.rental-share-icon-btn {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  color: hsl(0 0% 100% / 0.55);
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.rental-share-icon-btn:hover {
+  color: hsl(var(--gold));
+  background: hsl(0 0% 100% / 0.06);
+  border-color: hsl(var(--gold) / 0.22);
+}
+
+.rental-share-icon-btn--active {
+  color: hsl(var(--gold));
+  border-color: hsl(var(--gold) / 0.35);
+  background: hsl(var(--gold) / 0.08);
+}
+
+.rental-carousel-img {
+  display: block;
+  width: 100%;
+  max-height: min(72dvh, 720px);
+  object-fit: contain;
+  object-position: center center;
+  background: hsl(var(--charcoal));
+}
+
+.rental-gallery-expand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  color: hsl(0 0% 100%);
+  border: 1px solid hsl(0 0% 100% / 0.35);
+  background: hsl(0 0% 0% / 0.45);
+}
+
+@media (min-width: 768px) {
+  .rental-gallery-expand {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+.rental-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: 999px;
+  color: hsl(0 0% 100% / 0.85);
+  background: hsl(0 0% 0% / 0.45);
+  border: 1px solid hsl(0 0% 100% / 0.12);
+  backdrop-filter: blur(8px);
+}
+
+@media (min-width: 768px) {
+  .rental-gallery-arrow {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+.rental-gallery-arrow--prev {
+  left: 0.65rem;
+}
+
+.rental-gallery-arrow--next {
+  right: 0.65rem;
+}
+
+.rental-card {
+  backdrop-filter: blur(8px);
+}
+
+.rental-contact-card {
+  position: relative;
+  display: block;
+  min-width: 0;
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  border: 1px solid hsl(0 0% 100% / 0.1);
+  background: hsl(var(--charcoal-light) / 0.5);
+  box-shadow: 0 20px 40px hsl(0 0% 0% / 0.25);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .rental-contact-card {
+    padding: 1.5rem;
+  }
+}
+
+.rental-contact-card-accent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  background: linear-gradient(to bottom left, hsl(var(--gold) / 0.1), transparent);
+  border-bottom-left-radius: 9999px;
+  pointer-events: none;
+}
+
+.rental-contact-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .rental-contact-card-header {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: left;
+  }
+}
+
+.rental-contact-card-photo {
+  width: 4.75rem;
+  height: 4.75rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 10px 24px hsl(0 0% 0% / 0.35);
+  outline: 2px solid hsl(var(--gold) / 0.4);
+  outline-offset: 0;
+}
+
+@media (min-width: 640px) {
+  .rental-contact-card-photo {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+}
+
+.rental-contact-card-meta {
+  min-width: 0;
+  width: 100%;
+}
+
+.rental-contact-card-rule {
+  margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+  .rental-contact-card-rule {
+    margin-inline: 0;
+  }
+}
+
+.rental-contact-card-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid hsl(0 0% 100% / 0.1);
+}
+
+@media (min-width: 640px) {
+  .rental-contact-card-footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+  }
+}
+
+.rental-contact-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--gold) / 0.25);
+  background: hsl(var(--gold) / 0.08);
+  font-size: 0.6875rem;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: hsl(var(--gold) / 0.9);
+  white-space: nowrap;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.rental-contact-card:hover .rental-contact-card-cta {
+  color: hsl(var(--gold));
+  background: hsl(var(--gold) / 0.14);
+  border-color: hsl(var(--gold) / 0.4);
+}
+
+.rental-contact-card:hover {
+  border-color: hsl(var(--gold) / 0.25);
+  box-shadow: 0 24px 48px hsl(0 0% 0% / 0.35);
+  transform: translateY(-2px);
+}
+
+@media (hover: none) {
+  .rental-contact-card:hover {
+    transform: none;
+  }
+}

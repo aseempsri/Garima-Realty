@@ -33,7 +33,7 @@
 
         <img
           [src]="currentSlide().src"
-          [alt]="currentSlide().headline + altSuffix()"
+          [alt]="currentSlide().headline ? currentSlide().headline + altSuffix() : 'Listing photo ' + (index() + 1) + altSuffix()"
           class="gallery-lightbox__image"
         />
 
@@ -47,13 +47,19 @@
         </button>
       </div>
 
-      <div class="gallery-lightbox__caption">
-        @if (contextLabel()) {
-          <p class="gallery-lightbox__context">{{ contextLabel() }}</p>
-        }
-        <p class="gallery-lightbox__headline">{{ currentSlide().headline }}</p>
-        <p class="gallery-lightbox__text">{{ currentSlide().caption }}</p>
-      </div>
+      @if (currentSlide().headline || currentSlide().caption) {
+        <div class="gallery-lightbox__caption">
+          @if (contextLabel()) {
+            <p class="gallery-lightbox__context">{{ contextLabel() }}</p>
+          }
+          @if (currentSlide().headline) {
+            <p class="gallery-lightbox__headline">{{ currentSlide().headline }}</p>
+          }
+          @if (currentSlide().caption) {
+            <p class="gallery-lightbox__text">{{ currentSlide().caption }}</p>
+          }
+        </div>
+      }
     </div>
   </div>
 }
