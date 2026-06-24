@@ -34,7 +34,7 @@ export const PROJECT_SHARE_PROFILES: Record<string, ProjectShareProfile> = {
     hashId: 'godrej-skyline-koregaon-park',
     ogTitle: 'Godrej Skyline Koregaon Park Annexe | Garima Realty',
     ogDescription:
-      'Godrej Skyline by Godrej Properties — premium 3 & 4.5 bed residences in Koregaon Park Annexe, Pune. Rooftop pool, grand lobby, skyline views. From ₹3.50 Cr.',
+      'Godrej Skyline by Godrej Properties — premium 3 & 4.5 bed residences in Koregaon Park Annexe, Pune. Design your own castle in the clouds. From ₹3.50 Cr.',
     ogImagePath: '/assets/godrejSkyline/og-share.jpeg',
     headline: 'Godrej Skyline · Koregaon Park Annexe',
     subtitle: 'Premium high-rise · Now selling',
