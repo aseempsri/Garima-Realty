@@ -11,6 +11,7 @@ import { ServicesSectionComponent } from '../../components/services-section/serv
 import { WarehouseSectionComponent } from '../../components/warehouse-section/warehouse-section.component';
 import { PanchshilKharadiSectionComponent } from '../../components/panchshil-kharadi-section/panchshil-kharadi-section.component';
 import { TheEverettSectionComponent } from '../../components/the-everett-section/the-everett-section.component';
+import { GodrejSkylineSectionComponent } from '../../components/godrej-skyline-section/godrej-skyline-section.component';
 import { ProjectsSectionComponent } from '../../components/projects-section/projects-section.component';
 import { FeaturedPortfolioSectionComponent } from '../../components/featured-portfolio-section/featured-portfolio-section.component';
 import { WhyPuneSectionComponent } from '../../components/why-pune-section/why-pune-section.component';
@@ -26,6 +27,7 @@ import { WhatsAppButtonComponent } from '../../components/whatsapp-button/whatsa
 /** Section hash → video-hero anchor (scroll target below fixed navbar). */
 const PROJECT_HERO_ANCHORS: Record<string, string> = {
   'the-everett-lullanagar': 'the-everett-lullanagar-hero',
+  'godrej-skyline-koregaon-park': 'godrej-skyline-koregaon-park-hero',
   'panchshil-mundhwa': 'panchshil-mundhwa-hero',
 };
 
@@ -42,6 +44,7 @@ const PROJECT_HERO_ANCHORS: Record<string, string> = {
     WarehouseSectionComponent,
     PanchshilKharadiSectionComponent,
     TheEverettSectionComponent,
+    GodrejSkylineSectionComponent,
     ProjectsSectionComponent,
     FeaturedPortfolioSectionComponent,
     WhyPuneSectionComponent,

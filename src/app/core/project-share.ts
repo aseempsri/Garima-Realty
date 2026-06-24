@@ -29,6 +29,20 @@ export const PROJECT_SHARE_PROFILES: Record<string, ProjectShareProfile> = {
     priceLine: 'From ₹4 Cr All Inclusive',
     developer: 'Tribeca',
   },
+  'godrej-skyline-koregaon-park': {
+    slug: 'godrej-skyline-koregaon-park',
+    hashId: 'godrej-skyline-koregaon-park',
+    ogTitle: 'Godrej Skyline Koregaon Park Annexe | Garima Realty',
+    ogDescription:
+      'Godrej Skyline by Godrej Properties — premium 3 & 4.5 bed residences in Koregaon Park Annexe, Pune. Rooftop pool, grand lobby, skyline views. From ₹3.50 Cr.',
+    ogImagePath: '/assets/godrejSkyline/og-share.jpeg',
+    headline: 'Godrej Skyline · Koregaon Park Annexe',
+    subtitle: 'Premium high-rise · Now selling',
+    location: 'Koregaon Park Annexe, Pune',
+    configuration: '3 & 4.5 bed · Godrej Properties',
+    priceLine: 'From ₹3.50 Cr',
+    developer: 'Godrej Properties',
+  },
   'panchshil-mundhwa': {
     slug: 'panchshil-mundhwa',
     hashId: 'panchshil-mundhwa',

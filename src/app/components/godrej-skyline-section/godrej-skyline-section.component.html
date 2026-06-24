@@ -1,0 +1,381 @@
+<section id="godrej-skyline-koregaon-park" class="godrej-section relative bg-charcoal text-white">
+  <div
+    id="godrej-skyline-koregaon-park-hero"
+    class="godrej-video-hero relative w-full isolate flex flex-col bg-charcoal md:block md:min-h-screen md:overflow-hidden"
+  >
+    <div
+      class="godrej-video-frame relative w-full shrink-0 overflow-hidden aspect-[16/9] max-h-[min(46vh,300px)] sm:max-h-[min(50vh,340px)] md:absolute md:inset-0 md:aspect-auto md:max-h-none md:min-h-screen md:h-full bg-charcoal"
+    >
+      <video
+        #godrejVideo
+        class="godrej-video absolute inset-0 h-full w-full max-w-none max-h-none"
+        [src]="currentHeroVideoSrc()"
+        [muted]="true"
+        defaultMuted
+        playsinline
+        [attr.webkit-playsinline]="''"
+        preload="auto"
+        aria-label="Godrej Skyline Koregaon Park Annexe — project film"
+        (loadedmetadata)="onHeroVideoMetadata(godrejVideo)"
+        (seeked)="onHeroVideoSeeked(godrejVideo)"
+        (ended)="onHeroVideoEnded()"
+      ></video>
+      <div
+        class="md:hidden absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent pointer-events-none"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="hidden md:block absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/22 to-charcoal/38 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="hidden md:block absolute inset-0 bg-gradient-to-r from-charcoal/60 via-transparent to-charcoal/30 pointer-events-none"
+        aria-hidden="true"
+      ></div>
+    </div>
+
+    <div
+      class="relative z-10 w-full flex flex-col py-8 pb-12 md:py-0 md:min-h-screen md:absolute md:inset-0 md:justify-end md:pb-24 md:pt-32"
+    >
+      <div class="container mx-auto px-6 md:px-8">
+        <div class="max-w-3xl">
+          <p class="godrej-wine-accent text-xs font-sans uppercase tracking-[0.28em] mb-3 md:mb-4">
+            Godrej Properties · Koregaon Park Annexe
+          </p>
+          <h2
+            class="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.08] tracking-tight text-white flex flex-wrap items-baseline gap-x-3 md:gap-x-4 gap-y-2"
+          >
+            <span class="whitespace-nowrap">Godrej Skyline</span>
+            <span class="inline-flex items-center gap-2 md:gap-3">
+              <span>Koregaon Park Annexe</span>
+              <button
+                type="button"
+                (click)="openShareModal(); $event.stopPropagation()"
+                class="inline-flex shrink-0 rounded-full p-1.5 md:p-2 text-white/55 hover:text-gold border border-transparent hover:border-gold/20 hover:bg-white/[0.06] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/45 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal md:focus-visible:ring-offset-charcoal"
+                aria-haspopup="dialog"
+                [attr.aria-expanded]="shareModalOpen()"
+                aria-label="Open share options"
+              >
+                <lucide-icon name="share-2" class="w-[1.15rem] h-[1.15rem] md:w-5 md:h-5" stroke-width="1.85"></lucide-icon>
+              </button>
+            </span>
+          </h2>
+          <p class="mt-4 md:mt-5 text-base sm:text-lg md:text-xl text-white/75 font-sans max-w-xl">
+            Premium high-rise living — expansive views, refined design, trusted legacy.
+          </p>
+          <p class="mt-2 text-sm md:text-base text-white/50 font-sans tracking-wide">
+            3 &amp; 4.5 bed residences · Now selling
+          </p>
+          <div class="mt-6 md:mt-8 h-px w-24 gold-gradient opacity-90" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (shareModalOpen()) {
+    <div
+      class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-charcoal/55 backdrop-blur-[3px]"
+      (click)="closeShareModal()"
+      role="presentation"
+    >
+      <div
+        class="godrej-share-popover relative flex items-center gap-0.5 rounded-xl border border-white/10 bg-charcoal-light/92 backdrop-blur-md p-1 shadow-2xl shadow-black/50 ring-1 ring-gold/[0.12]"
+        (click)="$event.stopPropagation()"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Share options"
+      >
+        <button
+          type="button"
+          (click)="shareViaWhatsApp()"
+          class="godrej-share-icon-btn"
+          title="WhatsApp"
+          aria-label="Share on WhatsApp"
+        >
+          <lucide-icon name="message-circle" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+        <button
+          type="button"
+          (click)="shareViaFacebook()"
+          class="godrej-share-icon-btn"
+          title="Facebook"
+          aria-label="Share on Facebook"
+        >
+          <lucide-icon name="facebook" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+        <button
+          type="button"
+          (click)="shareViaTwitter()"
+          class="godrej-share-icon-btn"
+          title="X (Twitter)"
+          aria-label="Share on X"
+        >
+          <lucide-icon name="twitter" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+        <button
+          type="button"
+          (click)="copyShareLink()"
+          class="godrej-share-icon-btn"
+          [class.godrej-share-icon-btn--active]="linkCopied()"
+          [attr.title]="linkCopied() ? 'Copied' : 'Copy share message'"
+          [attr.aria-label]="linkCopied() ? 'Message copied' : 'Copy formatted share message'"
+        >
+          <lucide-icon [name]="linkCopied() ? 'check' : 'copy'" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+        <span class="mx-0.5 h-7 w-px shrink-0 bg-white/10 self-center" aria-hidden="true"></span>
+        <button
+          type="button"
+          (click)="closeShareModal()"
+          class="godrej-share-icon-btn godrej-share-icon-btn--close"
+          title="Close"
+          aria-label="Close"
+        >
+          <lucide-icon name="x" class="w-[22px] h-[22px]" stroke-width="1.75"></lucide-icon>
+        </button>
+      </div>
+    </div>
+  }
+
+  <div class="relative bg-gradient-to-b from-charcoal via-charcoal-light/30 to-charcoal overflow-hidden">
+    <div
+      class="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,hsl(var(--gold))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--gold))_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(90%,720px)] h-64 bg-gold/10 blur-[100px] rounded-full pointer-events-none"
+      aria-hidden="true"
+    ></div>
+
+    <div class="container mx-auto px-6 md:px-8 py-16 md:py-24 relative z-10">
+      <header class="text-center max-w-2xl mx-auto mb-14 md:mb-20">
+        <span class="godrej-wine-accent text-xs font-sans uppercase tracking-[0.25em]">Project intelligence</span>
+        <h3 class="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl text-white font-medium tracking-tight">
+          Residence overview &amp; highlights
+        </h3>
+        <blockquote class="mt-6 font-serif text-lg md:text-xl text-white/70 italic">
+          “{{ brandQuote }}”
+        </blockquote>
+        <div class="mt-6 h-px w-16 gold-gradient mx-auto" aria-hidden="true"></div>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+        <article class="godrej-card p-6 md:p-8 rounded-2xl border border-white/10 bg-charcoal-light/60 backdrop-blur-md shadow-xl shadow-black/25 flex flex-col md:col-span-2 xl:col-span-1">
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Pricing</h4>
+          <ul class="mt-6 space-y-4 flex-1">
+            @for (tier of pricingTiers; track tier.label) {
+              <li class="godrej-price-row rounded-xl border border-gold/20 bg-black/20 px-4 py-3">
+                <span class="text-gold font-sans text-sm uppercase tracking-wider">{{ tier.label }}</span>
+                <p class="mt-1 font-serif text-base md:text-lg text-white">{{ tier.detail }}</p>
+                <p class="mt-0.5 text-white/50 text-sm font-sans">{{ tier.note }}</p>
+              </li>
+            }
+          </ul>
+        </article>
+
+        <article
+          class="godrej-card p-6 md:p-8 rounded-2xl border border-white/10 bg-gradient-to-br from-charcoal-light/80 to-charcoal/90 backdrop-blur-md flex flex-col"
+        >
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Residence design</h4>
+          <ul class="mt-6 space-y-4 text-white/75 font-sans text-sm md:text-base leading-relaxed flex-1">
+            @for (point of overviewPoints; track point) {
+              <li class="flex gap-3">
+                <span class="text-gold mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-gold/80" aria-hidden="true"></span>
+                <span>{{ point }}</span>
+              </li>
+            }
+          </ul>
+        </article>
+
+        <article class="godrej-card p-6 md:p-8 rounded-2xl border border-white/10 bg-charcoal-light/55 backdrop-blur-md flex flex-col">
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Project highlights</h4>
+          <ul class="mt-6 space-y-3 text-white/70 font-sans text-sm md:text-base leading-relaxed flex-1">
+            @for (h of highlightPoints; track h) {
+              <li class="flex gap-2">
+                <span class="text-gold shrink-0 mt-0.5">✦</span>
+                <span>{{ h }}</span>
+              </li>
+            }
+          </ul>
+        </article>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mt-6 md:mt-8">
+        <article class="godrej-card p-6 md:p-8 rounded-2xl border border-white/10 bg-charcoal-light/50 backdrop-blur-md flex flex-col">
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Launch &amp; booking</h4>
+          <dl class="mt-6 space-y-4 flex-1">
+            @for (row of launchNotes; track row.label) {
+              <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-4 border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                <dt class="godrej-wine-accent text-xs font-sans uppercase tracking-[0.2em] shrink-0 sm:w-40">{{ row.label }}</dt>
+                <dd class="text-white/85 font-sans">{{ row.value }}</dd>
+              </div>
+            }
+          </dl>
+          <p class="mt-5 text-xs text-white/45 font-sans leading-relaxed border-t border-white/10 pt-4">
+            {{ launchFootnote }}
+          </p>
+        </article>
+
+        <article class="godrej-card p-6 md:p-8 rounded-2xl border border-gold/25 bg-black/25 backdrop-blur-sm flex flex-col">
+          <h4 class="font-serif text-xl md:text-2xl text-gold-light font-medium">Why Godrej Skyline</h4>
+          <ul class="mt-6 space-y-3 text-white/70 font-sans text-sm md:text-base leading-relaxed flex-1">
+            @for (w of whyPoints; track w) {
+              <li class="pl-4 border-l-2 border-gold/40">{{ w }}</li>
+            }
+          </ul>
+        </article>
+
+        <article class="godrej-card p-6 md:p-8 rounded-2xl border border-white/10 bg-charcoal-light/50 backdrop-blur-md md:col-span-2 xl:col-span-1 flex flex-col">
+          <h4 class="font-serif text-xl md:text-2xl text-white font-medium">Payment plans</h4>
+          <ul class="mt-6 space-y-3 flex-1">
+            @for (plan of paymentPlans; track plan.label) {
+              <li class="rounded-lg bg-white/5 border border-white/10 px-4 py-3">
+                <span class="text-gold text-xs font-sans uppercase tracking-wider">{{ plan.label }}</span>
+                <p class="mt-1 text-white/85 font-sans text-sm md:text-base">{{ plan.detail }}</p>
+                <p class="mt-0.5 text-white/50 text-sm font-sans">{{ plan.note }}</p>
+              </li>
+            }
+          </ul>
+        </article>
+      </div>
+
+      <div
+        class="godrej-carousel mt-16 md:mt-24"
+        (mouseenter)="carouselPaused.set(true)"
+        (mouseleave)="carouselPaused.set(false)"
+      >
+        <div class="mb-8 md:mb-10 max-w-2xl">
+          <p class="godrej-wine-accent text-xs font-sans uppercase tracking-[0.28em]">Godrej Skyline · Koregaon Park Annexe</p>
+          <h3 class="mt-3 font-serif text-3xl md:text-4xl lg:text-[2.75rem] text-white tracking-tight leading-tight">
+            Presentation gallery
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch min-w-0">
+          <div class="flex flex-col min-h-0 min-w-0 order-2 lg:order-1">
+            <p
+              class="text-[10px] font-sans uppercase tracking-[0.22em] text-white/40 mb-3 hidden lg:block"
+            >
+              Select a view
+            </p>
+            <div
+              class="godrej-gallery-scroll flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto lg:max-h-[min(72dvh,720px)] pb-1 -mx-1 px-1 lg:mx-0 lg:px-0 lg:pr-2 snap-x snap-mandatory lg:snap-none scroll-pl-1"
+            >
+              @for (slide of carouselSlides; track slide.src; let i = $index) {
+                <button
+                  type="button"
+                  (click)="goCarousel(i)"
+                  class="godrej-gallery-card snap-start"
+                  [class.godrej-gallery-card--active]="carouselIndex() === i"
+                  [attr.aria-current]="carouselIndex() === i ? 'true' : null"
+                >
+                  <span
+                    class="inline-flex items-center gap-2 text-[10px] font-sans uppercase tracking-[0.18em] text-gold/85"
+                  >
+                    Artist’s impression
+                    <span class="text-white/25">·</span>
+                    <span class="tabular-nums text-white/50">{{ i + 1 }}/{{ carouselSlides.length }}</span>
+                  </span>
+                  <span
+                    class="absolute top-3 right-3 h-2 w-2 rounded-full border border-white/20 transition-colors"
+                    [class.bg-gold]="carouselIndex() === i"
+                    [class.border-gold/60]="carouselIndex() === i"
+                    [class.bg-transparent]="carouselIndex() !== i"
+                    aria-hidden="true"
+                  ></span>
+                  <h4 class="mt-3 font-serif text-lg md:text-xl text-white leading-snug pr-6 text-left">
+                    {{ slide.headline }}
+                  </h4>
+                  <p class="mt-2 text-sm text-white/55 font-sans leading-relaxed text-left line-clamp-3">
+                    {{ slide.caption }}
+                  </p>
+                </button>
+              }
+            </div>
+          </div>
+
+          <div class="order-1 lg:order-2 min-h-0 min-w-0 flex flex-col justify-center lg:min-h-full">
+            <div
+              class="relative rounded-2xl overflow-hidden ring-1 ring-gold/25 shadow-2xl shadow-black/50 bg-charcoal godrej-gallery-stage w-full"
+              (touchstart)="onCarouselTouchStart($event)"
+              (touchend)="onCarouselTouchEnd($event)"
+            >
+              <div
+                class="absolute top-2 left-2 md:top-4 md:left-4 z-20 flex items-center gap-2"
+              >
+                <button
+                  type="button"
+                  (click)="openGallery(); $event.stopPropagation()"
+                  class="godrej-gallery-expand"
+                  aria-label="Expand image to full screen"
+                >
+                  <lucide-icon name="maximize-2" class="w-3.5 h-3.5 md:w-4 md:h-4" stroke-width="2"></lucide-icon>
+                </button>
+              </div>
+              <div
+                class="absolute top-2 right-2 md:top-4 md:right-4 z-20 flex items-center gap-2 px-2 py-1 md:px-3 md:py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-white/10 text-[10px] md:text-xs font-sans text-white/90 tabular-nums"
+              >
+                {{ carouselIndex() + 1 }}/{{ carouselSlides.length }}
+              </div>
+
+              <button
+                type="button"
+                (click)="advanceCarousel(-1)"
+                class="godrej-gallery-arrow godrej-gallery-arrow--prev"
+                aria-label="Previous image"
+              >
+                <lucide-icon name="chevron-left" class="w-3 h-3 md:w-6 md:h-6" stroke-width="2"></lucide-icon>
+              </button>
+              <button
+                type="button"
+                (click)="advanceCarousel(1)"
+                class="godrej-gallery-arrow godrej-gallery-arrow--next"
+                aria-label="Next image"
+              >
+                <lucide-icon name="chevron-right" class="w-3 h-3 md:w-6 md:h-6" stroke-width="2"></lucide-icon>
+              </button>
+
+              <div class="relative z-0 w-full godrej-gallery-image-box">
+                <button
+                  type="button"
+                  class="godrej-gallery-image-trigger"
+                  (click)="openGallery()"
+                  aria-label="Expand image to full screen"
+                >
+                  <img
+                    [src]="currentCarouselSlide().src"
+                    [alt]="currentCarouselSlide().headline + ' — Godrej Skyline Koregaon Park Annexe'"
+                    class="godrej-gallery-hero-img"
+                    loading="lazy"
+                  />
+                </button>
+              </div>
+
+              <div
+                class="pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden md:block bg-gradient-to-t from-black/88 via-black/45 to-transparent pt-28 pb-5 md:pb-7 px-4 md:px-6"
+              >
+                <p class="text-[10px] font-sans uppercase tracking-[0.22em] text-gold/90">Godrej Properties · Koregaon Park Annexe</p>
+                <p class="mt-2 font-serif text-2xl md:text-3xl lg:text-4xl text-white leading-tight">
+                  {{ currentCarouselSlide().headline }}
+                </p>
+                <p class="mt-2 text-sm md:text-base text-white/65 font-sans leading-relaxed max-w-2xl line-clamp-2">
+                  {{ currentCarouselSlide().caption }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-gallery-lightbox
+    [open]="galleryExpanded()"
+    [slides]="carouselSlides"
+    [index]="carouselIndex()"
+    contextLabel="Godrej Properties · Koregaon Park Annexe"
+    altSuffix=" — Godrej Skyline Koregaon Park Annexe"
+    (closed)="closeGallery()"
+    (previous)="advanceCarousel(-1)"
+    (next)="advanceCarousel(1)"
+  />
+</section>

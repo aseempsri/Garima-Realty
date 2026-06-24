@@ -1,0 +1,364 @@
+/* Godrej Skyline Koregaon Park Annexe — full-height video + editorial content */
+
+#godrej-skyline-koregaon-park,
+#godrej-skyline-koregaon-park-hero {
+  scroll-margin-top: 5.5rem;
+}
+
+.godrej-wine-accent {
+  color: hsl(350 45% 58% / 0.92);
+}
+
+.godrej-video-hero {
+  min-height: 0;
+}
+
+@media (min-width: 768px) {
+  .godrej-video-hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
+.godrej-video-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.godrej-video {
+  object-fit: contain;
+  object-position: center center;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  image-rendering: auto;
+}
+
+@supports (image-rendering: high-quality) {
+  .godrej-video {
+    image-rendering: high-quality;
+  }
+}
+
+.godrej-gallery-image-box {
+  padding: 0;
+  line-height: 0;
+}
+
+.godrej-gallery-hero-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: min(78dvh, 920px);
+  object-fit: contain;
+  object-position: center center;
+}
+
+@media (min-width: 1024px) {
+  .godrej-gallery-hero-img {
+    max-height: min(82dvh, 960px);
+  }
+}
+
+.godrej-gallery-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 1px hsl(var(--gold) / 0.08),
+    0 25px 50px -12px rgb(0 0 0 / 0.45);
+}
+
+@media (min-width: 1024px) {
+  .godrej-gallery-image-box {
+    width: 100%;
+  }
+}
+
+.godrej-gallery-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--gold) / 0.35) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.godrej-gallery-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.godrej-gallery-scroll::-webkit-scrollbar-thumb {
+  background: hsl(var(--gold) / 0.3);
+  border-radius: 999px;
+}
+
+.godrej-gallery-scroll::-webkit-scrollbar-track {
+  background: hsl(0 0% 100% / 0.04);
+  border-radius: 999px;
+}
+
+.godrej-gallery-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: min(88vw, 300px);
+  text-align: left;
+  padding: 1rem 1.1rem 1.15rem;
+  border-radius: 0.75rem;
+  border: 1px solid hsl(0 0% 100% / 0.1);
+  background: hsl(var(--charcoal-light) / 0.45);
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+@media (min-width: 1024px) {
+  .godrej-gallery-card {
+    width: 100%;
+  }
+}
+
+.godrej-gallery-card:hover {
+  border-color: hsl(var(--gold) / 0.22);
+  background: hsl(var(--charcoal-light) / 0.6);
+}
+
+.godrej-gallery-card--active {
+  border-color: hsl(var(--gold) / 0.45);
+  background: hsl(var(--charcoal-light) / 0.75);
+  box-shadow:
+    0 0 0 1px hsl(var(--gold) / 0.12),
+    0 12px 40px -16px rgb(0 0 0 / 0.5);
+}
+
+.godrej-gallery-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--charcoal)), 0 0 0 4px hsl(var(--gold) / 0.45);
+}
+
+.godrej-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: 999px;
+  color: hsl(0 0% 100% / 0.85);
+  background: hsl(0 0% 0% / 0.45);
+  border: 1px solid hsl(0 0% 100% / 0.12);
+  backdrop-filter: blur(8px);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .godrej-gallery-arrow {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+.godrej-gallery-arrow:hover {
+  color: hsl(var(--gold));
+  background: hsl(0 0% 0% / 0.62);
+  border-color: hsl(var(--gold) / 0.35);
+}
+
+.godrej-gallery-arrow:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--charcoal)), 0 0 0 4px hsl(var(--gold) / 0.45);
+}
+
+.godrej-gallery-arrow--prev {
+  left: 0.65rem;
+}
+
+@media (min-width: 768px) {
+  .godrej-gallery-arrow--prev {
+    left: 1rem;
+  }
+}
+
+.godrej-gallery-arrow--next {
+  right: 0.65rem;
+}
+
+@media (min-width: 768px) {
+  .godrej-gallery-arrow--next {
+    right: 1rem;
+  }
+}
+
+.godrej-gallery-expand,
+.godrej-gallery-image-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid hsl(0 0% 100% / 0.12);
+  background: hsl(0 0% 0% / 0.55);
+  backdrop-filter: blur(8px);
+  color: hsl(0 0% 100% / 0.85);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.godrej-gallery-expand {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  color: hsl(0 0% 100%);
+  border-color: hsl(0 0% 100% / 0.35);
+  background: hsl(0 0% 0% / 0.45);
+  box-shadow: 0 1px 4px hsl(0 0% 0% / 0.35);
+}
+
+@media (min-width: 768px) {
+  .godrej-gallery-expand {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-color: hsl(0 0% 100% / 0.45);
+    background: hsl(0 0% 0% / 0.5);
+    box-shadow:
+      0 0 10px hsl(0 0% 100% / 0.7),
+      0 0 22px hsl(0 0% 100% / 0.35),
+      inset 0 0 10px hsl(0 0% 100% / 0.12);
+  }
+}
+
+.godrej-gallery-expand lucide-icon,
+.godrej-gallery-expand svg {
+  filter: none;
+}
+
+@media (min-width: 768px) {
+  .godrej-gallery-expand lucide-icon,
+  .godrej-gallery-expand svg {
+    filter:
+      drop-shadow(0 0 2px hsl(0 0% 100% / 1))
+      drop-shadow(0 0 6px hsl(0 0% 100% / 0.85))
+      drop-shadow(0 0 12px hsl(0 0% 100% / 0.5));
+  }
+}
+
+.godrej-gallery-expand:hover {
+  color: hsl(0 0% 100%);
+  border-color: hsl(0 0% 100% / 0.65);
+  background: hsl(0 0% 0% / 0.62);
+  box-shadow:
+    0 0 14px hsl(0 0% 100% / 0.85),
+    0 0 28px hsl(0 0% 100% / 0.45),
+    inset 0 0 12px hsl(0 0% 100% / 0.16);
+}
+.godrej-gallery-image-trigger:hover {
+  color: hsl(var(--gold));
+  border-color: hsl(var(--gold) / 0.35);
+  background: hsl(0 0% 0% / 0.68);
+}
+
+.godrej-gallery-expand:focus-visible,
+.godrej-gallery-image-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--charcoal)), 0 0 0 4px hsl(var(--gold) / 0.45);
+}
+
+.godrej-gallery-image-trigger {
+  width: 100%;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.godrej-gallery-image-trigger:hover {
+  background: transparent;
+  border: none;
+}
+
+.godrej-card {
+  position: relative;
+}
+
+.godrej-share-popover {
+  animation: godrej-share-in 0.2s ease-out;
+}
+
+@keyframes godrej-share-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.godrej-share-icon-btn {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  color: hsl(0 0% 100% / 0.55);
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.godrej-share-icon-btn:hover {
+  color: hsl(var(--gold));
+  background: hsl(0 0% 100% / 0.06);
+  border-color: hsl(var(--gold) / 0.22);
+}
+
+.godrej-share-icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--charcoal)), 0 0 0 4px hsl(var(--gold) / 0.45);
+}
+
+.godrej-share-icon-btn--active {
+  color: hsl(var(--gold));
+  border-color: hsl(var(--gold) / 0.35);
+  background: hsl(var(--gold) / 0.08);
+}
+
+.godrej-share-icon-btn--close:hover {
+  color: hsl(0 0% 100% / 0.9);
+  border-color: hsl(0 0% 100% / 0.12);
+}
+
+.godrej-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--gold) / 0.25),
+    transparent 40%,
+    transparent 60%,
+    hsl(350 45% 58% / 0.15)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
