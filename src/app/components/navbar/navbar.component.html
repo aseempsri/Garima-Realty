@@ -6,11 +6,11 @@
       routerLink="/"
       (click)="scrollToTop()"
       class="navbar-logo flex items-center gap-3 transition-all duration-300 md:!opacity-100 md:!visible md:!pointer-events-auto"
-      [class.opacity-0]="!pastHero"
-      [class.invisible]="!pastHero"
-      [class.pointer-events-none]="!pastHero"
-      [class.opacity-100]="pastHero"
-      [class.visible]="pastHero">
+      [class.opacity-0]="!logoVisible"
+      [class.invisible]="!logoVisible"
+      [class.pointer-events-none]="!logoVisible"
+      [class.opacity-100]="logoVisible"
+      [class.visible]="logoVisible">
       <img src="assets/gr%20logo.png" alt="Garima Realty" class="h-10 object-contain" />
     </a>
 
@@ -99,13 +99,14 @@
                   [class.rotate-180]="mobileProjectsOpen"></lucide-icon>
               </button>
               @if (mobileProjectsOpen) {
-                <div class="flex flex-col items-center gap-4 mt-4">
+                <div class="flex flex-col items-stretch gap-2.5 mt-4 w-72 max-w-[82vw]">
                   @for (p of projectLinks; track p.slug) {
                     <a
                       [routerLink]="['/project', p.slug]"
                       (click)="closeMobile()"
-                      class="mobile-menu-link text-xs tracking-widest uppercase text-white/75 hover:text-gold transition-colors text-center px-6">
-                      {{ p.label }}
+                      class="mobile-project-item">
+                      <span class="mobile-project-item__arrow" aria-hidden="true">&#8250;</span>
+                      <span>{{ p.label }}</span>
                     </a>
                   }
                 </div>

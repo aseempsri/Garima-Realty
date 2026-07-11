@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, OnDestroy, HostListener, inject } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, OnDestroy, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
@@ -22,11 +22,18 @@ interface ProjectLink {
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  /** Always show the logo (e.g. on inner pages that have no hero branding). */
+  @Input() alwaysShowLogo = false;
+
   scrolled = false;
   pastHero = false;
   mobileOpen = false;
   projectsOpen = false;
   mobileProjectsOpen = false;
+
+  get logoVisible(): boolean {
+    return this.pastHero || this.alwaysShowLogo;
+  }
 
   navLinks: NavLink[] = [
     { label: 'About', href: '/#about' },
