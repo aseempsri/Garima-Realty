@@ -3,7 +3,8 @@
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
   <div class="container mx-auto flex items-center justify-between px-6">
     <a
-      href="#"
+      routerLink="/"
+      (click)="scrollToTop()"
       class="navbar-logo flex items-center gap-3 transition-all duration-300 md:!opacity-100 md:!visible md:!pointer-events-auto"
       [class.opacity-0]="!pastHero"
       [class.invisible]="!pastHero"
@@ -15,15 +16,50 @@
 
     <!-- Desktop -->
     <div class="hidden md:flex items-center gap-8">
-      @for (link of navLinks; track link.href) {
-        <a
-          [href]="link.href"
-          class="text-sm font-sans tracking-widest uppercase text-white/80 hover:text-gold transition-colors duration-300">
-          {{ link.label }}
-        </a>
+      @for (link of navLinks; track link.label) {
+        @if (link.dropdown) {
+          <div class="nav-dropdown relative">
+            <button
+              type="button"
+              (click)="toggleProjects()"
+              class="flex items-center gap-1.5 text-sm font-sans tracking-widest uppercase text-white/80 hover:text-gold transition-colors duration-300"
+              aria-haspopup="true"
+              [attr.aria-expanded]="projectsOpen">
+              {{ link.label }}
+              <lucide-icon
+                name="chevron-down"
+                [size]="15"
+                class="transition-transform duration-300"
+                [class.rotate-180]="projectsOpen"></lucide-icon>
+            </button>
+
+            <div
+              class="nav-dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-4"
+              [class.nav-dropdown-menu--open]="projectsOpen">
+              <div
+                class="min-w-[16rem] rounded-xl border border-white/10 bg-charcoal-light/95 backdrop-blur-md shadow-2xl shadow-black/50 ring-1 ring-gold/[0.12] p-2">
+                @for (p of projectLinks; track p.slug) {
+                  <a
+                    [routerLink]="['/project', p.slug]"
+                    (click)="projectsOpen = false"
+                    class="nav-dropdown-item flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-sans text-white/80 hover:text-gold hover:bg-white/5 transition-colors">
+                    <span class="text-gold/70">&#8250;</span>
+                    <span>{{ p.label }}</span>
+                  </a>
+                }
+              </div>
+            </div>
+          </div>
+        } @else {
+          <a
+            [href]="link.href"
+            class="text-sm font-sans tracking-widest uppercase text-white/80 hover:text-gold transition-colors duration-300">
+            {{ link.label }}
+          </a>
+        }
       }
       <a
-        href="#contact"
+        href="/#contact"
         class="ml-4 px-5 py-2 border border-gold text-gold text-sm uppercase tracking-widest hover:bg-gold hover:text-white transition-all duration-300">
         Enquire
       </a>
@@ -46,16 +82,46 @@
   @if (mobileOpen) {
     <div class="mobile-menu-glass md:hidden border-t border-white/20">
       <div class="flex flex-col items-center py-6 gap-5">
-        @for (link of navLinks; track link.href) {
-          <a
-            [href]="link.href"
-            (click)="closeMobile()"
-            class="mobile-menu-link text-sm tracking-widest uppercase text-white hover:text-gold transition-colors">
-            {{ link.label }}
-          </a>
+        @for (link of navLinks; track link.label) {
+          @if (link.dropdown) {
+            <div class="flex flex-col items-center w-full">
+              <button
+                type="button"
+                (click)="toggleMobileProjects()"
+                class="mobile-menu-link flex items-center gap-1.5 text-sm tracking-widest uppercase text-white hover:text-gold transition-colors"
+                aria-haspopup="true"
+                [attr.aria-expanded]="mobileProjectsOpen">
+                {{ link.label }}
+                <lucide-icon
+                  name="chevron-down"
+                  [size]="15"
+                  class="transition-transform duration-300"
+                  [class.rotate-180]="mobileProjectsOpen"></lucide-icon>
+              </button>
+              @if (mobileProjectsOpen) {
+                <div class="flex flex-col items-center gap-4 mt-4">
+                  @for (p of projectLinks; track p.slug) {
+                    <a
+                      [routerLink]="['/project', p.slug]"
+                      (click)="closeMobile()"
+                      class="mobile-menu-link text-xs tracking-widest uppercase text-white/75 hover:text-gold transition-colors text-center px-6">
+                      {{ p.label }}
+                    </a>
+                  }
+                </div>
+              }
+            </div>
+          } @else {
+            <a
+              [href]="link.href"
+              (click)="closeMobile()"
+              class="mobile-menu-link text-sm tracking-widest uppercase text-white hover:text-gold transition-colors">
+              {{ link.label }}
+            </a>
+          }
         }
         <a
-          href="#contact"
+          href="/#contact"
           (click)="closeMobile()"
           class="mobile-menu-btn mt-2 px-6 py-2 border border-gold text-gold text-sm uppercase tracking-widest hover:bg-gold hover:text-white transition-all">
           Enquire

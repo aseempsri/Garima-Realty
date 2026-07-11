@@ -23,7 +23,7 @@
         <span class="text-gold text-xs uppercase tracking-[0.3em] font-sans mb-2">Quick Links</span>
         @for (link of quickLinks; track link) {
           <a
-            [href]="'#' + link.toLowerCase()"
+            [href]="'/#' + link.toLowerCase()"
             class="text-white/50 text-sm font-sans hover:text-gold transition-colors"
           >
             {{ link }}

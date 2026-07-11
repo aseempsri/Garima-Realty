@@ -1,0 +1,20 @@
+<div class="min-h-screen bg-charcoal">
+  <app-navbar></app-navbar>
+
+  <div class="pt-16 md:pt-20">
+  @switch (slug()) {
+    @case ('panchshil-mundhwa') {
+      <app-panchshil-kharadi-section></app-panchshil-kharadi-section>
+    }
+    @case ('the-everett-lullanagar') {
+      <app-the-everett-section></app-the-everett-section>
+    }
+    @case ('godrej-skyline-koregaon-park') {
+      <app-godrej-skyline-section></app-godrej-skyline-section>
+    }
+  }
+  </div>
+
+  <app-footer></app-footer>
+  <app-whatsapp-button></app-whatsapp-button>
+</div>
